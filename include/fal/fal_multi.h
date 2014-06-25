@@ -40,6 +40,7 @@ typedef struct
     fal_igmp_sg_addr_t source;
     fal_igmp_sg_addr_t group;
     fal_pbmp_t port_map;
+    a_uint32_t vlan_id;
 } fal_igmp_sg_entry_t;
 
 //#define MULTI_DEBUG_

@@ -2298,6 +2298,29 @@ cmd_data_check_multi(char *info, void *val, a_uint32_t size)
     }
     while (talk_mode && (SW_OK != rv));
 
+    do
+    {
+        cmd = get_sub_cmd("vlanid", "0xffff");
+        SW_RTN_ON_NULL_PARAM(cmd);
+
+        if (!strncasecmp(cmd, "quit", 4))
+        {
+            return SW_BAD_VALUE;
+        }
+        else if (!strncasecmp(cmd, "help", 4))
+        {
+            dprintf("usage: the range is 0 -- 4095 or 65535\n");
+            rv = SW_BAD_VALUE;
+        }
+        else
+        {
+            rv = cmd_data_check_uint32(cmd, &(entry.vlan_id), sizeof (a_uint32_t));
+            if (SW_OK != rv)
+                dprintf("usage: the range is 0 -- 4095 or 65535\n");
+        }
+    }
+    while (talk_mode && (SW_OK != rv));
+
     *(fal_igmp_sg_entry_t *)val = entry;
 
     return SW_OK;
@@ -2330,6 +2353,7 @@ cmd_data_print_multi(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
                                sizeof (fal_ip6_addr_t));
 
     dprintf("\n[entry portmap]: [portmap]:0x%x  ", entry->port_map);
+    dprintf("\n[entry vlanid]: [vlanid]:%d  ", entry->vlan_id);
 
 }
 
