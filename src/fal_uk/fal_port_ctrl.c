@@ -404,6 +404,15 @@ fal_port_link_status_get(a_uint32_t dev_id, fal_port_t port_id, a_bool_t * statu
 }
 
 sw_error_t
+fal_ports_link_status_get(a_uint32_t dev_id, a_uint32_t * status)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PTS_LINK_STATUS_GET, dev_id, (a_uint32_t)status);
+    return rv;
+}
+
+sw_error_t
 fal_port_mac_loopback_set(a_uint32_t dev_id, fal_port_t port_id, a_bool_t enable)
 {
     sw_error_t rv;

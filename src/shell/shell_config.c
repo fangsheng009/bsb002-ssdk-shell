@@ -65,6 +65,7 @@ struct cmd_des_t gcmd_des[] =
             {"linkstatus", "get", "get link status of a port", "<port_id>", SW_API_PT_LINK_STATUS_GET, NULL},
             {"macLoopback", "set", "set mac level loop back mode of port", "<port_id> <enable|disable>", SW_API_PT_MAC_LOOPBACK_SET, NULL},
             {"macLoopback", "get", "get mac level loop back mode of port", "<port_id>", SW_API_PT_MAC_LOOPBACK_GET, NULL},
+            {"ptslinkstatus", "get", "get link status of all ports", "", SW_API_PTS_LINK_STATUS_GET, NULL},
             {NULL, NULL, NULL, NULL, (int)NULL, NULL},/*end of desc*/
         },
     },
