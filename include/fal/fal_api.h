@@ -63,7 +63,8 @@ extern "C" {
     SW_API_DEF(SW_API_PT_LINK_MODE_GET, fal_port_link_forcemode_get), \
     SW_API_DEF(SW_API_PT_LINK_STATUS_GET, fal_port_link_status_get), \
     SW_API_DEF(SW_API_PT_MAC_LOOPBACK_SET, fal_port_mac_loopback_set), \
-    SW_API_DEF(SW_API_PT_MAC_LOOPBACK_GET, fal_port_mac_loopback_get),
+    SW_API_DEF(SW_API_PT_MAC_LOOPBACK_GET, fal_port_mac_loopback_get), \
+    SW_API_DEF(SW_API_PTS_LINK_STATUS_GET, fal_ports_link_status_get),
 
 #define PORTCONTROL_API_PARAM \
     SW_API_DESC(SW_API_PT_DUPLEX_GET) \
@@ -106,7 +107,8 @@ extern "C" {
     SW_API_DESC(SW_API_PT_LINK_MODE_GET) \
     SW_API_DESC(SW_API_PT_LINK_STATUS_GET) \
     SW_API_DESC(SW_API_PT_MAC_LOOPBACK_SET) \
-    SW_API_DESC(SW_API_PT_MAC_LOOPBACK_GET)
+    SW_API_DESC(SW_API_PT_MAC_LOOPBACK_GET) \
+    SW_API_DESC(SW_API_PTS_LINK_STATUS_GET)
 #else
 #define PORTCONTROL_API
 #define PORTCONTROL_API_PARAM

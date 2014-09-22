@@ -308,6 +308,9 @@ extern "c" {
     fal_port_link_status_get(a_uint32_t dev_id, fal_port_t port_id, a_bool_t * status);
 
     sw_error_t
+    fal_ports_link_status_get(a_uint32_t dev_id, a_uint32_t * status);
+
+    sw_error_t
     fal_port_mac_loopback_set(a_uint32_t dev_id, fal_port_t port_id, a_bool_t enable);
 
 
