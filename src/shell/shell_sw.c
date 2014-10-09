@@ -38,262 +38,217 @@ get_devid(void)
 }
 
 
-#if defined ISIS
-
 sw_error_t
 cmd_show_fdb(a_uint32_t *arg_val)
 {
-    sw_error_t rtn;
-    a_uint32_t cnt = 0;
-    fal_fdb_op_t    *fdb_op    = (fal_fdb_op_t *)    (ioctl_buf + sizeof(sw_error_t) / 4);
-    fal_fdb_entry_t *fdb_entry = (fal_fdb_entry_t *) (ioctl_buf + sizeof(sw_error_t) / 4 + sizeof(fal_fdb_op_t) / 4);
+    if (ssdk_cfg.init_cfg.chip_type == CHIP_ISIS) {
+	    sw_error_t rtn;
+	    a_uint32_t cnt = 0;
+	    fal_fdb_op_t    *fdb_op    = (fal_fdb_op_t *)    (ioctl_buf + sizeof(sw_error_t) / 4);
+	    fal_fdb_entry_t *fdb_entry = (fal_fdb_entry_t *) (ioctl_buf + sizeof(sw_error_t) / 4 + sizeof(fal_fdb_op_t) / 4);
 
-    aos_mem_zero(fdb_op,    sizeof (fal_fdb_op_t));
-    aos_mem_zero(fdb_entry, sizeof (fal_fdb_entry_t));
-    arg_val[0] = SW_API_FDB_EXTEND_FIRST;
+	    aos_mem_zero(fdb_op,    sizeof (fal_fdb_op_t));
+	    aos_mem_zero(fdb_entry, sizeof (fal_fdb_entry_t));
+	    arg_val[0] = SW_API_FDB_EXTEND_FIRST;
 
-    while (1)
-    {
-        arg_val[1] = (a_uint32_t) ioctl_buf;
-        arg_val[2] = get_devid();
-        arg_val[3] = (a_uint32_t) fdb_op;
-        arg_val[4] = (a_uint32_t) fdb_entry;
+	    while (1)
+	    {
+	        arg_val[1] = (a_uint32_t) ioctl_buf;
+	        arg_val[2] = get_devid();
+	        arg_val[3] = (a_uint32_t) fdb_op;
+	        arg_val[4] = (a_uint32_t) fdb_entry;
 
-        rtn = cmd_exec_api(arg_val);
-        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
-        {
-            break;
-        }
-        arg_val[0] = SW_API_FDB_EXTEND_NEXT;
-        cnt++;
+	        rtn = cmd_exec_api(arg_val);
+	        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
+	        {
+	            break;
+	        }
+	        arg_val[0] = SW_API_FDB_EXTEND_NEXT;
+	        cnt++;
+	    }
+
+	    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
+	        cmd_print_error(rtn);
+	    else
+	        dprintf("\ntotal %d entries\n", cnt);
+    }else if (ssdk_cfg.init_cfg.chip_type == CHIP_ISISC) {
+	    sw_error_t rtn;
+	    a_uint32_t cnt = 0;
+	    fal_fdb_op_t    *fdb_op    = (fal_fdb_op_t *)    (ioctl_buf + sizeof(sw_error_t) / 4);
+	    fal_fdb_entry_t *fdb_entry = (fal_fdb_entry_t *) (ioctl_buf + sizeof(sw_error_t) / 4 + sizeof(fal_fdb_op_t) / 4);
+
+	    aos_mem_zero(fdb_op,    sizeof (fal_fdb_op_t));
+	    aos_mem_zero(fdb_entry, sizeof (fal_fdb_entry_t));
+	    arg_val[0] = SW_API_FDB_EXTEND_FIRST;
+
+	    while (1)
+	    {
+	        arg_val[1] = (a_uint32_t) ioctl_buf;
+	        arg_val[2] = get_devid();
+	        arg_val[3] = (a_uint32_t) fdb_op;
+	        arg_val[4] = (a_uint32_t) fdb_entry;
+
+	        rtn = cmd_exec_api(arg_val);
+	        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
+	        {
+	            break;
+	        }
+	        arg_val[0] = SW_API_FDB_EXTEND_NEXT;
+	        cnt++;
+	    }
+
+	    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
+	        cmd_print_error(rtn);
+	    else
+	        dprintf("\ntotal %d entries\n", cnt);
+    }else if (ssdk_cfg.init_cfg.chip_type == CHIP_SHIVA) {
+	    sw_error_t rtn;
+	    a_uint32_t cnt = 0;
+	    fal_fdb_entry_t *fdb_entry = (fal_fdb_entry_t *) (ioctl_buf + 2);
+
+	    memset(fdb_entry, 0, sizeof (fal_fdb_entry_t));
+	    arg_val[0] = SW_API_FDB_ITERATE;
+	    *(ioctl_buf + 1) = 0;
+
+	    while (1)
+	    {
+	        arg_val[1] = (a_uint32_t) ioctl_buf;
+	        arg_val[2] = get_devid();
+	        arg_val[3] = (a_uint32_t) (ioctl_buf + 1);
+	        arg_val[4] = (a_uint32_t) fdb_entry;
+
+	        rtn = cmd_exec_api(arg_val);
+	        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
+	        {
+	            break;
+	        }
+	        cnt++;
+	    }
+
+	    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
+	        cmd_print_error(rtn);
+	    else
+	        dprintf("\ntotal %d entries\n", cnt);
+    }else {
+	    sw_error_t rtn;
+	    a_uint32_t rtn_size = 1, cnt = 0;
+	    fal_fdb_entry_t *fdb_entry = (fal_fdb_entry_t *) (ioctl_buf + rtn_size);
+
+	    memset(fdb_entry, 0, sizeof (fal_fdb_entry_t));
+	    arg_val[0] = SW_API_FDB_FIRST;
+
+	    while (1)
+	    {
+	        arg_val[1] = (a_uint32_t) ioctl_buf;
+	        arg_val[2] = get_devid();
+	        arg_val[3] = (a_uint32_t) fdb_entry;
+
+	        rtn = cmd_exec_api(arg_val);
+	        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
+	        {
+	            break;
+	        }
+	        arg_val[0] = SW_API_FDB_NEXT;
+	        cnt++;
+	    }
+
+	    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
+	        cmd_print_error(rtn);
+	    else
+	        dprintf("\ntotal %d entries\n", cnt);
     }
-
-    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
-        cmd_print_error(rtn);
-    else
-        dprintf("\ntotal %d entries\n", cnt);
 
     return SW_OK;
 }
-
-#elif defined ISISC
-
-sw_error_t
-cmd_show_fdb(a_uint32_t *arg_val)
-{
-    sw_error_t rtn;
-    a_uint32_t cnt = 0;
-    fal_fdb_op_t    *fdb_op    = (fal_fdb_op_t *)    (ioctl_buf + sizeof(sw_error_t) / 4);
-    fal_fdb_entry_t *fdb_entry = (fal_fdb_entry_t *) (ioctl_buf + sizeof(sw_error_t) / 4 + sizeof(fal_fdb_op_t) / 4);
-
-    aos_mem_zero(fdb_op,    sizeof (fal_fdb_op_t));
-    aos_mem_zero(fdb_entry, sizeof (fal_fdb_entry_t));
-    arg_val[0] = SW_API_FDB_EXTEND_FIRST;
-
-    while (1)
-    {
-        arg_val[1] = (a_uint32_t) ioctl_buf;
-        arg_val[2] = get_devid();
-        arg_val[3] = (a_uint32_t) fdb_op;
-        arg_val[4] = (a_uint32_t) fdb_entry;
-
-        rtn = cmd_exec_api(arg_val);
-        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
-        {
-            break;
-        }
-        arg_val[0] = SW_API_FDB_EXTEND_NEXT;
-        cnt++;
-    }
-
-    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
-        cmd_print_error(rtn);
-    else
-        dprintf("\ntotal %d entries\n", cnt);
-
-    return SW_OK;
-}
-
-#elif defined SHIVA
-
-sw_error_t
-cmd_show_fdb(a_uint32_t *arg_val)
-{
-    sw_error_t rtn;
-    a_uint32_t cnt = 0;
-    fal_fdb_entry_t *fdb_entry = (fal_fdb_entry_t *) (ioctl_buf + 2);
-
-    memset(fdb_entry, 0, sizeof (fal_fdb_entry_t));
-    arg_val[0] = SW_API_FDB_ITERATE;
-    *(ioctl_buf + 1) = 0;
-
-    while (1)
-    {
-        arg_val[1] = (a_uint32_t) ioctl_buf;
-        arg_val[2] = get_devid();
-        arg_val[3] = (a_uint32_t) (ioctl_buf + 1);
-        arg_val[4] = (a_uint32_t) fdb_entry;
-
-        rtn = cmd_exec_api(arg_val);
-        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
-        {
-            break;
-        }
-        cnt++;
-    }
-
-    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
-        cmd_print_error(rtn);
-    else
-        dprintf("\ntotal %d entries\n", cnt);
-
-    return SW_OK;
-}
-
-#else
-
-sw_error_t
-cmd_show_fdb(a_uint32_t *arg_val)
-{
-    sw_error_t rtn;
-    a_uint32_t rtn_size = 1, cnt = 0;
-    fal_fdb_entry_t *fdb_entry = (fal_fdb_entry_t *) (ioctl_buf + rtn_size);
-
-    memset(fdb_entry, 0, sizeof (fal_fdb_entry_t));
-    arg_val[0] = SW_API_FDB_FIRST;
-
-    while (1)
-    {
-        arg_val[1] = (a_uint32_t) ioctl_buf;
-        arg_val[2] = get_devid();
-        arg_val[3] = (a_uint32_t) fdb_entry;
-
-        rtn = cmd_exec_api(arg_val);
-        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
-        {
-            break;
-        }
-        arg_val[0] = SW_API_FDB_NEXT;
-        cnt++;
-    }
-
-    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
-        cmd_print_error(rtn);
-    else
-        dprintf("\ntotal %d entries\n", cnt);
-
-    return SW_OK;
-}
-#endif
-
-#if defined ISIS
 
 sw_error_t
 cmd_show_vlan(a_uint32_t *arg_val)
 {
-    sw_error_t rtn;
-    a_uint32_t rtn_size = 1 ,tmp_vid = FAL_NEXT_ENTRY_FIRST_ID, cnt = 0;
-    fal_vlan_t *vlan_entry = (fal_vlan_t *) (ioctl_buf + rtn_size);
+    if (ssdk_cfg.init_cfg.chip_type == CHIP_ISIS) {
+	    sw_error_t rtn;
+	    a_uint32_t rtn_size = 1 ,tmp_vid = FAL_NEXT_ENTRY_FIRST_ID, cnt = 0;
+	    fal_vlan_t *vlan_entry = (fal_vlan_t *) (ioctl_buf + rtn_size);
 
-    while (1)
-    {
-        arg_val[0] = SW_API_VLAN_NEXT;
-        arg_val[1] = (a_uint32_t) ioctl_buf;
-        arg_val[2] = get_devid();
-        arg_val[3] = tmp_vid;
-        arg_val[4] = (a_uint32_t) vlan_entry;
+	    while (1)
+	    {
+	        arg_val[0] = SW_API_VLAN_NEXT;
+	        arg_val[1] = (a_uint32_t) ioctl_buf;
+	        arg_val[2] = get_devid();
+	        arg_val[3] = tmp_vid;
+	        arg_val[4] = (a_uint32_t) vlan_entry;
 
-        rtn = cmd_exec_api(arg_val);
-        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
-        {
-            break;
-        }
+	        rtn = cmd_exec_api(arg_val);
+	        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
+	        {
+	            break;
+	        }
 
-        tmp_vid = vlan_entry->vid;
-        cnt++;
-    }
+	        tmp_vid = vlan_entry->vid;
+	        cnt++;
+	    }
 
-    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
-        cmd_print_error(rtn);
-    else
-        dprintf("\ntotal %d entries\n", cnt);
+	    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
+	        cmd_print_error(rtn);
+	    else
+	        dprintf("\ntotal %d entries\n", cnt);
+    }else if (ssdk_cfg.init_cfg.chip_type == CHIP_ISISC) {
+	    sw_error_t rtn;
+	    a_uint32_t rtn_size = 1 ,tmp_vid = FAL_NEXT_ENTRY_FIRST_ID, cnt = 0;
+	    fal_vlan_t *vlan_entry = (fal_vlan_t *) (ioctl_buf + rtn_size);
 
-    return SW_OK;
-}
+	    while (1)
+	    {
+	        arg_val[0] = SW_API_VLAN_NEXT;
+	        arg_val[1] = (a_uint32_t) ioctl_buf;
+	        arg_val[2] = get_devid();
+	        arg_val[3] = tmp_vid;
+	        arg_val[4] = (a_uint32_t) vlan_entry;
 
-#elif defined ISISC
+	        rtn = cmd_exec_api(arg_val);
+	        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
+	        {
+	            break;
+	        }
 
-sw_error_t
-cmd_show_vlan(a_uint32_t *arg_val)
-{
-    sw_error_t rtn;
-    a_uint32_t rtn_size = 1 ,tmp_vid = FAL_NEXT_ENTRY_FIRST_ID, cnt = 0;
-    fal_vlan_t *vlan_entry = (fal_vlan_t *) (ioctl_buf + rtn_size);
+	        tmp_vid = vlan_entry->vid;
+	        cnt++;
+	    }
 
-    while (1)
-    {
-        arg_val[0] = SW_API_VLAN_NEXT;
-        arg_val[1] = (a_uint32_t) ioctl_buf;
-        arg_val[2] = get_devid();
-        arg_val[3] = tmp_vid;
-        arg_val[4] = (a_uint32_t) vlan_entry;
+	    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
+	        cmd_print_error(rtn);
+	    else
+	        dprintf("\ntotal %d entries\n", cnt);
+    } else {
+	    sw_error_t rtn;
+	    a_uint32_t rtn_size = 1 ,tmp_vid = 0, cnt = 0;
+	    fal_vlan_t *vlan_entry = (fal_vlan_t *) (ioctl_buf + rtn_size);
 
-        rtn = cmd_exec_api(arg_val);
-        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
-        {
-            break;
-        }
+	    while (1)
+	    {
+	        arg_val[0] = SW_API_VLAN_NEXT;
+	        arg_val[1] = (a_uint32_t) ioctl_buf;
+	        arg_val[2] = get_devid();
+	        arg_val[3] = tmp_vid;
+	        arg_val[4] = (a_uint32_t) vlan_entry;
 
-        tmp_vid = vlan_entry->vid;
-        cnt++;
-    }
+	        rtn = cmd_exec_api(arg_val);
+	        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
+	        {
+	            break;
+	        }
 
-    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
-        cmd_print_error(rtn);
-    else
-        dprintf("\ntotal %d entries\n", cnt);
+	        tmp_vid = vlan_entry->vid;
+	        cnt++;
+	    }
 
-    return SW_OK;
-}
-
-
-#else
-
-sw_error_t
-cmd_show_vlan(a_uint32_t *arg_val)
-{
-    sw_error_t rtn;
-    a_uint32_t rtn_size = 1 ,tmp_vid = 0, cnt = 0;
-    fal_vlan_t *vlan_entry = (fal_vlan_t *) (ioctl_buf + rtn_size);
-
-    while (1)
-    {
-        arg_val[0] = SW_API_VLAN_NEXT;
-        arg_val[1] = (a_uint32_t) ioctl_buf;
-        arg_val[2] = get_devid();
-        arg_val[3] = tmp_vid;
-        arg_val[4] = (a_uint32_t) vlan_entry;
-
-        rtn = cmd_exec_api(arg_val);
-        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
-        {
-            break;
-        }
-
-        tmp_vid = vlan_entry->vid;
-        cnt++;
-    }
-
-    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
-        cmd_print_error(rtn);
-    else
-        dprintf("\ntotal %d entries\n", cnt);
+	    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
+	        cmd_print_error(rtn);
+	    else
+	        dprintf("\ntotal %d entries\n", cnt);
+	}
 
     return SW_OK;
 }
-
-#endif
-
 
 sw_error_t
 cmd_show_resv_fdb(a_uint32_t *arg_val)
