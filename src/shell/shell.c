@@ -24,6 +24,8 @@
 
 a_uint32_t *ioctl_buf;
 ssdk_init_cfg init_cfg = def_init_cfg;
+ssdk_cfg_t ssdk_cfg;
+static a_uint32_t flag = 0;
 
 static a_uint32_t *ioctl_argp;
 static FILE * out_fd;
@@ -581,6 +583,13 @@ cmd_socket_init()
     {
         dprintf("\n SSDK Init Fail! RV[%d]", rv);
     }
+
+    if (flag == 0)
+    {
+        aos_mem_set(&ssdk_cfg, 0 ,sizeof(ssdk_cfg_t));
+        rv = sw_uk_exec(SW_API_SSDK_CFG, 0, &ssdk_cfg);
+        flag = 1;
+    }
     return (int)rv;
 }
 
@@ -600,6 +609,7 @@ cmd_exit(void)
     free(ioctl_buf);
     free(ioctl_argp);
     ssdk_cleanup();
+    flag = 0;
     return SW_OK;
 }
 
