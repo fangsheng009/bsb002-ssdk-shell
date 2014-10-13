@@ -25,6 +25,7 @@ extern "C" {
 
     extern a_uint32_t *ioctl_buf;
     extern ssdk_init_cfg init_cfg;
+    extern ssdk_cfg_t ssdk_cfg;
 
 #define IOCTL_BUF_SIZE 2048
 #define CMDSTR_BUF_SIZE 1024
