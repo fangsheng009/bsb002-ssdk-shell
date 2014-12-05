@@ -807,7 +807,15 @@ extern "C" {
     SW_API_DEF(SW_API_COSMAP_PRI_TO_EHQU_SET, fal_cosmap_pri_to_ehqueue_set), \
     SW_API_DEF(SW_API_COSMAP_PRI_TO_EHQU_GET, fal_cosmap_pri_to_ehqueue_get), \
     SW_API_DEF(SW_API_COSMAP_EG_REMARK_SET, fal_cosmap_egress_remark_set), \
-    SW_API_DEF(SW_API_COSMAP_EG_REMARK_GET, fal_cosmap_egress_remark_get),
+    SW_API_DEF(SW_API_COSMAP_EG_REMARK_GET, fal_cosmap_egress_remark_get), \
+    SW_API_DEF(SW_API_COSMAP_DSCP_TO_EHPRI_SET, fal_cosmap_dscp_to_ehpri_set), \
+    SW_API_DEF(SW_API_COSMAP_DSCP_TO_EHPRI_GET, fal_cosmap_dscp_to_ehpri_get), \
+    SW_API_DEF(SW_API_COSMAP_DSCP_TO_EHDP_SET, fal_cosmap_dscp_to_ehdp_set), \
+    SW_API_DEF(SW_API_COSMAP_DSCP_TO_EHDP_GET, fal_cosmap_dscp_to_ehdp_get), \
+    SW_API_DEF(SW_API_COSMAP_UP_TO_EHPRI_SET, fal_cosmap_up_to_ehpri_set), \
+    SW_API_DEF(SW_API_COSMAP_UP_TO_EHPRI_GET, fal_cosmap_up_to_ehpri_get), \
+    SW_API_DEF(SW_API_COSMAP_UP_TO_EHDP_SET, fal_cosmap_up_to_ehdp_set), \
+    SW_API_DEF(SW_API_COSMAP_UP_TO_EHDP_GET, fal_cosmap_up_to_ehdp_get),
 
 #define COSMAP_API_PARAM \
     SW_API_DESC(SW_API_COSMAP_DSCP_TO_PRI_SET)  \
@@ -823,7 +831,15 @@ extern "C" {
     SW_API_DESC(SW_API_COSMAP_PRI_TO_EHQU_SET) \
     SW_API_DESC(SW_API_COSMAP_PRI_TO_EHQU_GET) \
     SW_API_DESC(SW_API_COSMAP_EG_REMARK_SET) \
-    SW_API_DESC(SW_API_COSMAP_EG_REMARK_GET)
+    SW_API_DESC(SW_API_COSMAP_EG_REMARK_GET) \
+    SW_API_DESC(SW_API_COSMAP_DSCP_TO_EHPRI_SET)  \
+    SW_API_DESC(SW_API_COSMAP_DSCP_TO_EHPRI_GET)  \
+    SW_API_DESC(SW_API_COSMAP_DSCP_TO_EHDP_SET)  \
+    SW_API_DESC(SW_API_COSMAP_DSCP_TO_EHDP_GET)  \
+    SW_API_DESC(SW_API_COSMAP_UP_TO_EHPRI_SET)  \
+    SW_API_DESC(SW_API_COSMAP_UP_TO_EHPRI_GET)  \
+    SW_API_DESC(SW_API_COSMAP_UP_TO_EHDP_SET)  \
+    SW_API_DESC(SW_API_COSMAP_UP_TO_EHDP_GET)
 #else
 #define COSMAP_API
 #define COSMAP_API_PARAM
