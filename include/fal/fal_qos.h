@@ -48,6 +48,7 @@ extern "C" {
         FAL_QOS_UP_MODE,        /**<   qos assignment based on 802.1p field in vlan tag*/
         FAL_QOS_DSCP_MODE,      /**<  qos assignment based on dscp field in ip header */
         FAL_QOS_PORT_MODE,      /**<  qos assignment based on port */
+        FAL_QOS_FLOW_MODE,      /**<  qos assignment based on flow */
         FAL_QOS_MODE_BUTT
     } fal_qos_mode_t;
 

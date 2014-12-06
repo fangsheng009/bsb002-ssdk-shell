@@ -70,6 +70,38 @@ extern "C" {
                             a_uint32_t * dp);
 
     sw_error_t
+    fal_cosmap_dscp_to_ehpri_set(a_uint32_t dev_id, a_uint32_t dscp,
+                               a_uint32_t pri);
+
+    sw_error_t
+    fal_cosmap_dscp_to_ehpri_get(a_uint32_t dev_id, a_uint32_t dscp,
+                               a_uint32_t * pri);
+
+    sw_error_t
+    fal_cosmap_dscp_to_ehdp_set(a_uint32_t dev_id, a_uint32_t dscp,
+                              a_uint32_t dp);
+
+    sw_error_t
+    fal_cosmap_dscp_to_ehdp_get(a_uint32_t dev_id, a_uint32_t dscp,
+                              a_uint32_t * dp);
+
+    sw_error_t
+    fal_cosmap_up_to_ehpri_set(a_uint32_t dev_id, a_uint32_t up,
+                             a_uint32_t pri);
+
+    sw_error_t
+    fal_cosmap_up_to_ehpri_get(a_uint32_t dev_id, a_uint32_t up,
+                             a_uint32_t * pri);
+
+    sw_error_t
+    fal_cosmap_up_to_ehdp_set(a_uint32_t dev_id, a_uint32_t up,
+                            a_uint32_t dp);
+
+    sw_error_t
+    fal_cosmap_up_to_ehdp_get(a_uint32_t dev_id, a_uint32_t up,
+                            a_uint32_t * dp);
+
+    sw_error_t
     fal_cosmap_pri_to_queue_set(a_uint32_t dev_id, a_uint32_t pri,
                                 a_uint32_t queue);
 

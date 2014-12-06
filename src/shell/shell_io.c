@@ -1019,6 +1019,10 @@ cmd_data_check_qos_pt(char *cmdstr, fal_qos_mode_t * val, a_uint32_t size)
     {
         *val = FAL_QOS_PORT_MODE;
     }
+    else if (!strcasecmp(cmdstr, "flow"))
+    {
+        *val = FAL_QOS_FLOW_MODE;
+    }
     else
     {
         return SW_BAD_VALUE;
@@ -1046,6 +1050,10 @@ cmd_data_print_qos_pt(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
     else if (*(a_uint32_t *) buf == FAL_QOS_PORT_MODE)
     {
         dprintf("PORT");
+    }
+    else if (*(a_uint32_t *) buf == FAL_QOS_FLOW_MODE)
+    {
+        dprintf("FLOW");
     }
     else
     {
