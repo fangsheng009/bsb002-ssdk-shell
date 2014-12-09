@@ -245,10 +245,10 @@ struct cmd_des_t gcmd_des[] =
             {"up2q", "get", "get user priority to queue mapping", "<up:0-7>", SW_API_COSMAP_UP_QU_GET, NULL},
             {"dscp2q", "set", "set dscp to queue mapping", "<dscp:0-63> <queueid:0-3>", SW_API_COSMAP_DSCP_QU_SET, NULL},
             {"dscp2q", "get", "get dscp to queue mapping", "<dscp:0-63>", SW_API_COSMAP_DSCP_QU_GET, NULL},
-            {"ptMode", "set", "set Qos mode of a port", "<port_id> <da|up|dscp> <enable|disable>", SW_API_QOS_PT_MODE_SET, NULL},
-            {"ptMode", "get", "get Qos mode of a port", "<port_id> <da|up|dscp>", SW_API_QOS_PT_MODE_GET, NULL},
-            {"ptModePri", "set", "set the priority of Qos modes of a port", "<port_id> <da|up|dscp> <priority:0-3>", SW_API_QOS_PT_MODE_PRI_SET, NULL},
-            {"ptModePri", "get", "get the priority of Qos modes of a port", "<port_id> <da|up|dscp>", SW_API_QOS_PT_MODE_PRI_GET, NULL},
+            {"ptMode", "set", "set Qos mode of a port", "<port_id> <da|up|dscp| flow> <enable|disable>", SW_API_QOS_PT_MODE_SET, NULL},
+            {"ptMode", "get", "get Qos mode of a port", "<port_id> <da|up|dscp| flow>", SW_API_QOS_PT_MODE_GET, NULL},
+            {"ptModePri", "set", "set the priority of Qos modes of a port", "<port_id> <da|up|dscp| flow> <priority:0-3>", SW_API_QOS_PT_MODE_PRI_SET, NULL},
+            {"ptModePri", "get", "get the priority of Qos modes of a port", "<port_id> <da|up|dscp| flow>", SW_API_QOS_PT_MODE_PRI_GET, NULL},
             {"ptDefaultUp", "set", "set default user priority for received frames of a port", "<port_id> <up:0-7>", SW_API_QOS_PORT_DEF_UP_SET, NULL},
             {"ptDefaultUp", "get", "get default user priority for received frames of a port", "<port_id>", SW_API_QOS_PORT_DEF_UP_GET, NULL},
             {"ptschMode", "set", "set port traffic scheduling mode", "<port_id> <sp|wrr|mix|mixplus> <q0,q1,q2,q3,q4,q5>", SW_API_QOS_PORT_SCH_MODE_SET, NULL},
@@ -374,7 +374,6 @@ struct cmd_des_t gcmd_des[] =
 #endif
 
 #ifdef IN_SEC
-#ifdef ISISC
     {
         "sec", "config security",
         {
@@ -397,7 +396,6 @@ struct cmd_des_t gcmd_des[] =
             {NULL, NULL, NULL, NULL, (int)NULL, NULL}/*end of desc*/
         },
     },
-#endif
 #endif
 
     /*stp*/
@@ -453,6 +451,14 @@ struct cmd_des_t gcmd_des[] =
             {"up2pri", "get", "get dot1p to priority map table", "<up>", SW_API_COSMAP_UP_TO_PRI_GET, NULL},
             {"up2dp", "set", "set dot1p to dp map table", "<up> <dp>", SW_API_COSMAP_UP_TO_DP_SET, NULL},
             {"up2dp", "get", "get dot1p to dp map table", "<up>", SW_API_COSMAP_UP_TO_DP_GET, NULL},
+            {"dscp2ehpri", "set", "set dscp to priority map table for WAN port", "<dscp> <priority>", SW_API_COSMAP_DSCP_TO_EHPRI_SET, NULL},
+            {"dscp2ehpri", "get", "get dscp to priority map table for WAN port", "<dscp>", SW_API_COSMAP_DSCP_TO_EHPRI_GET, NULL},
+            {"dscp2ehdp", "set", "set dscp to dp map table for WAN port", "<dscp> <dp>", SW_API_COSMAP_DSCP_TO_EHDP_SET, NULL},
+            {"dscp2ehdp", "get", "get dscp to dp map table for WAN port", "<dscp>", SW_API_COSMAP_DSCP_TO_EHDP_GET, NULL},
+            {"up2ehpri", "set", "set dot1p to priority map table for WAN port", "<up> <priority>", SW_API_COSMAP_UP_TO_EHPRI_SET, NULL},
+            {"up2ehpri", "get", "get dot1p to priority map table for WAN port", "<up>", SW_API_COSMAP_UP_TO_EHPRI_GET, NULL},
+            {"up2ehdp", "set", "set dot1p to dp map table for WAN port", "<up> <dp>", SW_API_COSMAP_UP_TO_EHDP_SET, NULL},
+            {"up2ehdp", "get", "get dot1p to dp map table for WAN port", "<up>", SW_API_COSMAP_UP_TO_EHDP_GET, NULL},
             {"pri2q", "set", "set priority to queue mapping", "<priority> <queueid>", SW_API_COSMAP_PRI_TO_QU_SET, NULL},
             {"pri2q", "get", "get priority to queue mapping", "<priority>", SW_API_COSMAP_PRI_TO_QU_GET, NULL},
             {"pri2ehq", "set", "set priority to enhanced queue mapping", "<priority> <queueid>", SW_API_COSMAP_PRI_TO_EHQU_SET, NULL},
