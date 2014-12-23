@@ -32,7 +32,8 @@ extern "C" {
 #define SW_CMD_NAPT_SHOW       (SW_API_MAX + 7)
 #define SW_CMD_INTFMAC_SHOW    (SW_API_MAX + 8)
 #define SW_CMD_PUBADDR_SHOW    (SW_API_MAX + 9)
-#define SW_CMD_MAX             (SW_API_MAX + 10)
+#define SW_CMD_FLOW_SHOW       (SW_API_MAX + 10)
+#define SW_CMD_MAX             (SW_API_MAX + 11)
 
 #define MAX_SUB_CMD_DES_NUM  60
 

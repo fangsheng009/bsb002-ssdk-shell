@@ -382,6 +382,14 @@ extern "C" {
 #define SW_API_CPU_VID_EN_GET    (54  + SW_API_MISC_OFFSET)
 #define SW_API_RTD_PPPOE_EN_SET      (55  + SW_API_MISC_OFFSET)
 #define SW_API_RTD_PPPOE_EN_GET    (56  + SW_API_MISC_OFFSET)
+#define SW_API_GLOBAL_MACADDR_SET      (57  + SW_API_MISC_OFFSET)
+#define SW_API_GLOBAL_MACADDR_GET    (58  + SW_API_MISC_OFFSET)
+#define SW_API_LLDP_STATUS_SET          (59  + SW_API_MISC_OFFSET)
+#define SW_API_LLDP_STATUS_GET          (60  + SW_API_MISC_OFFSET)
+#define SW_API_FRAME_CRC_RESERVE_SET          (61  + SW_API_MISC_OFFSET)
+#define SW_API_FRAME_CRC_RESERVE_GET          (62  + SW_API_MISC_OFFSET)
+
+
 
 
     /*led*/
@@ -501,6 +509,12 @@ extern "C" {
 #define SW_API_PRV_BASE_MASK_SET       (27  + SW_API_NAT_OFFSET)
 #define SW_API_PRV_BASE_MASK_GET       (28  + SW_API_NAT_OFFSET)
 #define SW_API_NAT_GLOBAL_SET          (29  + SW_API_NAT_OFFSET)
+#define SW_API_FLOW_ADD              (30  + SW_API_NAT_OFFSET)
+#define SW_API_FLOW_DEL              (31  + SW_API_NAT_OFFSET)
+#define SW_API_FLOW_GET              (32  + SW_API_NAT_OFFSET)
+#define SW_API_FLOW_NEXT             (33  + SW_API_NAT_OFFSET)
+#define SW_API_FLOW_COUNTER_BIND     (34  + SW_API_NAT_OFFSET)
+
 
     /* trunk */
 #define SW_API_TRUNK_OFFSET            1800

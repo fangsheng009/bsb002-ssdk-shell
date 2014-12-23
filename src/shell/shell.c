@@ -321,6 +321,7 @@ cmd_parse_sw(char **cmd_str, a_uint32_t * arg_val)
                               api_id == SW_CMD_HOST_SHOW ||
                               api_id == SW_CMD_NAT_SHOW ||
                               api_id == SW_CMD_NAPT_SHOW ||
+                              api_id == SW_CMD_FLOW_SHOW ||
                               api_id == SW_CMD_INTFMAC_SHOW ||
                               api_id == SW_CMD_PUBADDR_SHOW )) ||
             ( arg_index == 1 && api_id == SW_CMD_SET_DEVID) )

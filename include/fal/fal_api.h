@@ -710,7 +710,13 @@ extern "C" {
     SW_API_DEF(SW_API_CPU_VID_EN_SET, fal_cpu_vid_en_set), \
     SW_API_DEF(SW_API_CPU_VID_EN_GET, fal_cpu_vid_en_get), \
     SW_API_DEF(SW_API_RTD_PPPOE_EN_SET, fal_rtd_pppoe_en_set), \
-    SW_API_DEF(SW_API_RTD_PPPOE_EN_GET, fal_rtd_pppoe_en_get),
+    SW_API_DEF(SW_API_RTD_PPPOE_EN_GET, fal_rtd_pppoe_en_get), \
+    SW_API_DEF(SW_API_GLOBAL_MACADDR_SET, fal_global_macaddr_set), \
+    SW_API_DEF(SW_API_GLOBAL_MACADDR_GET, fal_global_macaddr_get), \
+    SW_API_DEF(SW_API_LLDP_STATUS_SET, fal_lldp_status_set), \
+    SW_API_DEF(SW_API_LLDP_STATUS_GET, fal_lldp_status_get), \
+    SW_API_DEF(SW_API_FRAME_CRC_RESERVE_SET, fal_frame_crc_reserve_set), \
+    SW_API_DEF(SW_API_FRAME_CRC_RESERVE_GET, fal_frame_crc_reserve_get), 
 
 
 
@@ -771,7 +777,13 @@ extern "C" {
     SW_API_DESC(SW_API_CPU_VID_EN_SET) \
     SW_API_DESC(SW_API_CPU_VID_EN_GET) \
     SW_API_DESC(SW_API_RTD_PPPOE_EN_SET) \
-    SW_API_DESC(SW_API_RTD_PPPOE_EN_GET)
+    SW_API_DESC(SW_API_RTD_PPPOE_EN_GET) \
+    SW_API_DESC(SW_API_GLOBAL_MACADDR_SET) \
+    SW_API_DESC(SW_API_GLOBAL_MACADDR_GET) \
+    SW_API_DESC(SW_API_LLDP_STATUS_SET) \
+    SW_API_DESC(SW_API_LLDP_STATUS_GET) \
+    SW_API_DESC(SW_API_FRAME_CRC_RESERVE_SET) \
+    SW_API_DESC(SW_API_FRAME_CRC_RESERVE_GET)
 
 
 #else
@@ -965,6 +977,11 @@ extern "C" {
     SW_API_DEF(SW_API_NAPT_GET, fal_napt_get), \
     SW_API_DEF(SW_API_NAPT_NEXT, fal_napt_next), \
     SW_API_DEF(SW_API_NAPT_COUNTER_BIND, fal_napt_counter_bind), \
+    SW_API_DEF(SW_API_FLOW_ADD, fal_flow_add), \
+    SW_API_DEF(SW_API_FLOW_DEL, fal_flow_del), \
+    SW_API_DEF(SW_API_FLOW_GET, fal_flow_get), \
+    SW_API_DEF(SW_API_FLOW_NEXT, fal_flow_next), \
+    SW_API_DEF(SW_API_FLOW_COUNTER_BIND, fal_flow_counter_bind), \
     SW_API_DEF(SW_API_NAT_STATUS_SET, fal_nat_status_set), \
     SW_API_DEF(SW_API_NAT_STATUS_GET, fal_nat_status_get), \
     SW_API_DEF(SW_API_NAT_HASH_MODE_SET, fal_nat_hash_mode_set), \
@@ -997,6 +1014,11 @@ extern "C" {
     SW_API_DESC(SW_API_NAPT_GET) \
     SW_API_DESC(SW_API_NAPT_NEXT) \
     SW_API_DESC(SW_API_NAPT_COUNTER_BIND) \
+    SW_API_DESC(SW_API_FLOW_ADD) \
+    SW_API_DESC(SW_API_FLOW_DEL) \
+    SW_API_DESC(SW_API_FLOW_GET) \
+    SW_API_DESC(SW_API_FLOW_NEXT) \
+    SW_API_DESC(SW_API_FLOW_COUNTER_BIND) \
     SW_API_DESC(SW_API_NAT_STATUS_SET) \
     SW_API_DESC(SW_API_NAT_STATUS_GET) \
     SW_API_DESC(SW_API_NAT_HASH_MODE_SET) \

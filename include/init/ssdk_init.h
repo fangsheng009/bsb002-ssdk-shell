@@ -82,6 +82,7 @@ extern "C" {
         CHIP_HORUS,
         CHIP_ISIS,
         CHIP_ISISC,
+        CHIP_DESS,
     } ssdk_chip_type;
 
     typedef struct
