@@ -553,3 +553,59 @@ fal_intr_status_mac_linkchg_clear(a_uint32_t dev_id)
     rv = sw_uk_exec(SW_API_INTR_STATUS_MAC_LINKCHG_CLEAR, dev_id);
     return rv;
 }
+
+sw_error_t
+fal_global_macaddr_set(a_uint32_t dev_id, fal_mac_addr_t * addr)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_GLOBAL_MACADDR_SET, dev_id, addr);
+    return rv;
+}
+
+sw_error_t
+fal_global_macaddr_get(a_uint32_t dev_id, fal_mac_addr_t * addr)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_GLOBAL_MACADDR_GET, dev_id, addr);
+    return rv;
+}
+
+sw_error_t
+fal_lldp_status_set(a_uint32_t dev_id, a_bool_t enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_LLDP_STATUS_SET, dev_id, (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_lldp_status_get(a_uint32_t dev_id, a_bool_t * enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_LLDP_STATUS_GET, dev_id, (a_uint32_t) enable);
+    return rv;
+}
+
+
+sw_error_t
+fal_frame_crc_reserve_set(a_uint32_t dev_id, a_bool_t enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FRAME_CRC_RESERVE_SET, dev_id, (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_frame_crc_reserve_get(a_uint32_t dev_id, a_bool_t * enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FRAME_CRC_RESERVE_GET, dev_id, (a_uint32_t) enable);
+    return rv;
+}
+

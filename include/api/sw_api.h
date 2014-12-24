@@ -86,6 +86,7 @@ extern "C" {
         SW_IP_GUARDMODE,
         SW_NATENTRY,
         SW_NAPTENTRY,
+        SW_FLOWENTRY,
         SW_NAPTMODE,
         SW_IP4ADDR,
         SW_IP6ADDR,

@@ -68,6 +68,8 @@ extern "C" {
         a_bool_t da_pri_en;
         a_uint8_t da_queue;
         a_bool_t white_list_en;
+        a_bool_t load_balance_en;
+        a_uint8_t load_balance;
     } fal_fdb_entry_t;
 
 #define FAL_FDB_DEL_STATIC   0x1
