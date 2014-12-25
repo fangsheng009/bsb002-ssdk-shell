@@ -430,3 +430,44 @@ fal_port_mac_loopback_get(a_uint32_t dev_id, fal_port_t port_id, a_bool_t *enabl
     rv = sw_uk_exec(SW_API_PT_MAC_LOOPBACK_GET, dev_id, port_id, (a_uint32_t)enable);
     return rv;
 }
+
+sw_error_t
+fal_port_congestion_drop_set(a_uint32_t dev_id, fal_port_t port_id, a_uint32_t queue_id, a_bool_t enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_CONGESTION_DROP_SET, dev_id, port_id, queue_id, (a_uint32_t)enable);
+    return rv;
+}
+
+
+sw_error_t
+fal_port_congestion_drop_get(a_uint32_t dev_id, fal_port_t port_id, a_uint32_t queue_id, a_bool_t *enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_CONGESTION_DROP_GET, dev_id, port_id, queue_id, (a_uint32_t)enable);
+    return rv;
+}
+
+sw_error_t
+fal_ring_flow_ctrl_thres_set(a_uint32_t dev_id, a_uint32_t ring_id, a_uint8_t on_thres, a_uint8_t off_thres)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_RING_FLOW_CTRL_THRES_SET, dev_id, ring_id, on_thres, off_thres);
+    return rv;
+}
+
+
+sw_error_t
+fal_ring_flow_ctrl_thres_get(a_uint32_t dev_id, a_uint32_t ring_id, a_uint8_t *on_thres, a_uint8_t *off_thres)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_RING_FLOW_CTRL_THRES_GET, dev_id, ring_id, (a_uint32_t)on_thres, (a_uint32_t)off_thres);
+    return rv;
+}
+
+
+

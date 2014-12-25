@@ -26,6 +26,7 @@ extern "C" {
 
 #include "common/sw.h"
 #include "fal/fal_type.h"
+#include "fal_multi.h"
 
     /* IP WCMP hash key flags */
 #define FAL_WCMP_HASH_KEY_SIP             0x1
@@ -54,6 +55,8 @@ extern "C" {
         fal_ip6_addr_t ip6_addr;
         fal_mac_addr_t mac_addr;
         a_uint32_t intf_id;
+        a_uint32_t lb_num;
+        a_uint32_t vrf_id;
         a_uint32_t expect_vid;
         fal_port_t port_id;
         a_bool_t mirror_en;
@@ -88,6 +91,7 @@ extern "C" {
     typedef struct
     {
         a_uint32_t entry_id;
+        a_uint32_t vrf_id;
         a_uint16_t vid_low;
         a_uint16_t vid_high;
         fal_mac_addr_t mac_addr;
@@ -100,6 +104,28 @@ extern "C" {
         a_uint32_t nh_nr;
         a_uint32_t nh_id[16];
     } fal_ip_wcmp_t;
+
+    typedef struct
+    {
+        a_bool_t valid;
+        a_uint32_t vrf_id;
+        fal_addr_type_t ip_version; /*0 for IPv4 and 1 for IPv6*/
+        a_uint32_t droute_type; /*0 for ARP and 1 for WCMP*/
+        a_uint32_t index;/*when droute_type equals 0, means ARP entry index or means WCMP indexs*/
+    } fal_default_route_t;
+
+    typedef struct
+    {
+        a_bool_t valid;
+        a_uint32_t vrf_id;
+        a_uint32_t ip_version; /*0 for IPv4 and 1 for IPv6*/
+        union {
+        fal_ip4_addr_t ip4_addr;
+        fal_ip6_addr_t ip6_addr;
+	}route_addr;
+        a_uint32_t prefix_length;/*For IPv4, up to 32 and for IPv6, up to 128*/
+    } fal_host_route_t;
+
 
     sw_error_t
     fal_ip_host_add(a_uint32_t dev_id, fal_host_entry_t * host_entry);
@@ -200,6 +226,42 @@ extern "C" {
 
     sw_error_t
     fal_ip_wcmp_hash_mode_get(a_uint32_t dev_id, a_uint32_t * hash_mode);
+
+    sw_error_t
+    fal_ip_vrf_base_addr_set(a_uint32_t dev_id, a_uint32_t vrf_id, fal_ip4_addr_t addr);
+
+    sw_error_t
+    fal_ip_vrf_base_addr_get(a_uint32_t dev_id, a_uint32_t vrf_id, fal_ip4_addr_t * addr);
+
+    sw_error_t
+    fal_ip_vrf_base_mask_set(a_uint32_t dev_id, a_uint32_t vrf_id, fal_ip4_addr_t addr);
+
+    sw_error_t
+    fal_ip_vrf_base_mask_get(a_uint32_t dev_id, a_uint32_t vrf_id, fal_ip4_addr_t * addr);
+
+    sw_error_t
+    fal_ip_default_route_set(a_uint32_t dev_id, a_uint32_t droute_id,
+			fal_default_route_t * entry);
+
+    sw_error_t
+    fal_ip_default_route_get(a_uint32_t dev_id, a_uint32_t droute_id,
+			fal_default_route_t * entry);
+
+    sw_error_t
+    fal_ip_host_route_set(a_uint32_t dev_id, a_uint32_t hroute_id,
+			fal_host_route_t * entry);
+
+    sw_error_t
+    fal_ip_host_route_get(a_uint32_t dev_id, a_uint32_t hroute_id,
+			fal_host_route_t * entry);
+
+	sw_error_t
+    fal_ip_wcmp_entry_set(a_uint32_t dev_id, a_uint32_t wcmp_id,
+			fal_ip_wcmp_t * wcmp);
+
+    sw_error_t
+    fal_ip_wcmp_entry_get(a_uint32_t dev_id, a_uint32_t wcmp_id,
+			fal_ip_wcmp_t * wcmp);
 
 #ifdef __cplusplus
 }

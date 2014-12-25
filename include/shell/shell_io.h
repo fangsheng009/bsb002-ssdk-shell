@@ -325,5 +325,23 @@ cmd_data_check_remark_entry(char *info, void *val, a_uint32_t size);
 void
 cmd_data_print_remark_entry(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
 
+sw_error_t
+cmd_data_check_default_route_entry(char *cmd_str, void * val, a_uint32_t size);
+
+void
+cmd_data_print_default_route_entry(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
+sw_error_t
+cmd_data_check_host_route_entry(char *cmd_str, void * val, a_uint32_t size);
+
+void
+cmd_data_print_host_route_entry(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
+sw_error_t
+cmd_data_check_ip_wcmp_entry(char *cmd_str, void * val, a_uint32_t size);
+
+void
+cmd_data_print_ip_wcmp_entry(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
 #endif
 

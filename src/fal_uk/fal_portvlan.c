@@ -460,3 +460,22 @@ fal_eg_trans_filter_bypass_en_get(a_uint32_t dev_id, a_uint32_t * enable)
     return rv;
 }
 
+sw_error_t
+fal_port_vrf_id_set(a_uint32_t dev_id, fal_port_t port_id,
+                              a_uint32_t vrf_id)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_VRF_ID_SET, dev_id, port_id, vrf_id);
+    return rv;
+}
+
+sw_error_t
+fal_port_vrf_id_get(a_uint32_t dev_id, fal_port_t port_id,
+                              a_uint32_t * vrf_id)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_VRF_ID_GET, dev_id, port_id, (a_uint32_t) vrf_id);
+    return rv;
+}

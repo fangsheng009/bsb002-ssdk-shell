@@ -263,3 +263,102 @@ fal_ip_wcmp_hash_mode_get(a_uint32_t dev_id, a_uint32_t * hash_mode)
     return rv;
 }
 
+sw_error_t
+fal_ip_vrf_base_addr_set(a_uint32_t dev_id, a_uint32_t vrf_id, fal_ip4_addr_t addr)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_IP_VRF_BASE_ADDR_SET, dev_id, vrf_id, addr);
+    return rv;
+}
+
+sw_error_t
+fal_ip_vrf_base_addr_get(a_uint32_t dev_id, a_uint32_t vrf_id, fal_ip4_addr_t * addr)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_IP_VRF_BASE_ADDR_GET, dev_id, vrf_id, (a_uint32_t) addr);
+    return rv;
+}
+
+sw_error_t
+fal_ip_vrf_base_mask_set(a_uint32_t dev_id, a_uint32_t vrf_id, fal_ip4_addr_t addr)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_IP_VRF_BASE_MASK_SET, dev_id, vrf_id, addr);
+    return rv;
+}
+
+sw_error_t
+fal_ip_vrf_base_mask_get(a_uint32_t dev_id, a_uint32_t vrf_id, fal_ip4_addr_t * addr)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_IP_VRF_BASE_MASK_GET, dev_id, vrf_id, (a_uint32_t) addr);
+    return rv;
+}
+
+sw_error_t
+fal_ip_default_route_set(a_uint32_t dev_id, a_uint32_t droute_id,
+    			fal_default_route_t * entry)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_IP_DEFAULT_ROUTE_SET, dev_id, droute_id, (a_uint32_t) entry);
+    return rv;
+}
+
+sw_error_t
+fal_ip_default_route_get(a_uint32_t dev_id, a_uint32_t droute_id,
+    			fal_default_route_t * entry)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_IP_DEFAULT_ROUTE_GET, dev_id, droute_id, (a_uint32_t) entry);
+    return rv;
+}
+
+sw_error_t
+fal_ip_host_route_set(a_uint32_t dev_id, a_uint32_t hroute_id,
+    			fal_host_route_t * entry)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_IP_HOST_ROUTE_SET, dev_id, hroute_id, (a_uint32_t) entry);
+    return rv;
+}
+
+sw_error_t
+fal_ip_host_route_get(a_uint32_t dev_id, a_uint32_t hroute_id,
+    			fal_host_route_t * entry)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_IP_HOST_ROUTE_GET, dev_id, hroute_id, (a_uint32_t) entry);
+    return rv;
+}
+
+sw_error_t
+fal_ip_wcmp_entry_set(a_uint32_t dev_id, a_uint32_t wcmp_id,
+    							fal_ip_wcmp_t * wcmp)
+{
+	sw_error_t rv;
+
+	rv = sw_uk_exec(SW_API_IP_WCMP_ENTRY_SET, dev_id, wcmp_id, (a_uint32_t) wcmp);
+	return rv;
+}
+
+
+sw_error_t
+fal_ip_wcmp_entry_get(a_uint32_t dev_id, a_uint32_t wcmp_id,
+    							fal_ip_wcmp_t * wcmp)
+{
+	sw_error_t rv;
+
+	rv = sw_uk_exec(SW_API_IP_WCMP_ENTRY_GET, dev_id, wcmp_id, (a_uint32_t) wcmp);
+	return rv;
+}
+
+
+
