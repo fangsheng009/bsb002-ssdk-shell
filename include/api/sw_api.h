@@ -111,6 +111,9 @@ extern "C" {
         SW_SEC_ICMP6,
         SW_REMARKENTRY,
         SW_SGINFOENTRY,
+        SW_DEFAULT_ROUTE_ENTRY,
+        SW_HOST_ROUTE_ENTRY,
+        SW_IP_WCMP_ENTRY,
     } sw_data_type_e;
 
     typedef struct

@@ -35,7 +35,7 @@ extern "C" {
 #define SW_CMD_FLOW_SHOW       (SW_API_MAX + 10)
 #define SW_CMD_MAX             (SW_API_MAX + 11)
 
-#define MAX_SUB_CMD_DES_NUM  60
+#define MAX_SUB_CMD_DES_NUM  80
 
     struct sub_cmd_des_t
     {
