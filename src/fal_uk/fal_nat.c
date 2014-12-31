@@ -113,6 +113,51 @@ fal_napt_counter_bind(a_uint32_t dev_id, a_uint32_t entry_id, a_uint32_t cnt_id,
 }
 
 sw_error_t
+fal_flow_add(a_uint32_t dev_id, fal_napt_entry_t * napt_entry)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FLOW_ADD, dev_id, (a_uint32_t) napt_entry);
+    return rv;
+}
+
+sw_error_t
+fal_flow_del(a_uint32_t dev_id, a_uint32_t del_mode, fal_napt_entry_t * napt_entry)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FLOW_DEL, dev_id, del_mode, (a_uint32_t) napt_entry);
+    return rv;
+}
+
+sw_error_t
+fal_flow_get(a_uint32_t dev_id, a_uint32_t get_mode, fal_napt_entry_t * napt_entry)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FLOW_GET, dev_id, get_mode, (a_uint32_t) napt_entry);
+    return rv;
+}
+
+sw_error_t
+fal_flow_next(a_uint32_t dev_id, a_uint32_t next_mode, fal_napt_entry_t * napt_entry)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FLOW_NEXT, dev_id, next_mode, (a_uint32_t) napt_entry);
+    return rv;
+}
+
+sw_error_t
+fal_flow_counter_bind(a_uint32_t dev_id, a_uint32_t entry_id, a_uint32_t cnt_id, a_bool_t enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FLOW_COUNTER_BIND, dev_id, entry_id, cnt_id, (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
 fal_nat_status_set(a_uint32_t dev_id, a_bool_t enable)
 {
     sw_error_t rv;

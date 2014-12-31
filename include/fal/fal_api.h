@@ -64,7 +64,12 @@ extern "C" {
     SW_API_DEF(SW_API_PT_LINK_STATUS_GET, fal_port_link_status_get), \
     SW_API_DEF(SW_API_PT_MAC_LOOPBACK_SET, fal_port_mac_loopback_set), \
     SW_API_DEF(SW_API_PT_MAC_LOOPBACK_GET, fal_port_mac_loopback_get), \
-    SW_API_DEF(SW_API_PTS_LINK_STATUS_GET, fal_ports_link_status_get),
+    SW_API_DEF(SW_API_PTS_LINK_STATUS_GET, fal_ports_link_status_get), \
+    SW_API_DEF(SW_API_PT_CONGESTION_DROP_SET, fal_port_congestion_drop_set), \
+    SW_API_DEF(SW_API_PT_CONGESTION_DROP_GET, fal_port_congestion_drop_get), \
+    SW_API_DEF(SW_API_PT_RING_FLOW_CTRL_THRES_SET, fal_ring_flow_ctrl_thres_set), \
+	SW_API_DEF(SW_API_PT_RING_FLOW_CTRL_THRES_GET, fal_ring_flow_ctrl_thres_get),
+	
 
 #define PORTCONTROL_API_PARAM \
     SW_API_DESC(SW_API_PT_DUPLEX_GET) \
@@ -108,7 +113,11 @@ extern "C" {
     SW_API_DESC(SW_API_PT_LINK_STATUS_GET) \
     SW_API_DESC(SW_API_PT_MAC_LOOPBACK_SET) \
     SW_API_DESC(SW_API_PT_MAC_LOOPBACK_GET) \
-    SW_API_DESC(SW_API_PTS_LINK_STATUS_GET)
+    SW_API_DESC(SW_API_PTS_LINK_STATUS_GET) \
+    SW_API_DESC(SW_API_PT_CONGESTION_DROP_SET) \
+    SW_API_DESC(SW_API_PT_CONGESTION_DROP_GET) \
+    SW_API_DESC(SW_API_PT_RING_FLOW_CTRL_THRES_SET) \
+    SW_API_DESC(SW_API_PT_RING_FLOW_CTRL_THRES_GET)
 #else
 #define PORTCONTROL_API
 #define PORTCONTROL_API_PARAM
@@ -194,7 +203,9 @@ extern "C" {
     SW_API_DEF(SW_API_NETISOLATE_SET, fal_netisolate_set), \
     SW_API_DEF(SW_API_NETISOLATE_GET, fal_netisolate_get), \
     SW_API_DEF(SW_API_EG_FLTR_BYPASS_EN_SET, fal_eg_trans_filter_bypass_en_set), \
-    SW_API_DEF(SW_API_EG_FLTR_BYPASS_EN_GET, fal_eg_trans_filter_bypass_en_get),
+    SW_API_DEF(SW_API_EG_FLTR_BYPASS_EN_GET, fal_eg_trans_filter_bypass_en_get), \
+    SW_API_DEF(SW_API_PT_VRF_ID_SET, fal_port_vrf_id_set), \
+    SW_API_DEF(SW_API_PT_VRF_ID_GET, fal_port_vrf_id_get),
 
 #define PORTVLAN_API_PARAM \
     SW_API_DESC(SW_API_PT_ING_MODE_GET) \
@@ -240,7 +251,9 @@ extern "C" {
     SW_API_DESC(SW_API_NETISOLATE_SET)   \
     SW_API_DESC(SW_API_NETISOLATE_GET)   \
     SW_API_DESC(SW_API_EG_FLTR_BYPASS_EN_SET)   \
-    SW_API_DESC(SW_API_EG_FLTR_BYPASS_EN_GET)
+    SW_API_DESC(SW_API_EG_FLTR_BYPASS_EN_GET)  \
+    SW_API_DESC(SW_API_PT_VRF_ID_SET)  \
+    SW_API_DESC(SW_API_PT_VRF_ID_GET)
 #else
 #define PORTVLAN_API
 #define PORTVLAN_API_PARAM
@@ -710,7 +723,13 @@ extern "C" {
     SW_API_DEF(SW_API_CPU_VID_EN_SET, fal_cpu_vid_en_set), \
     SW_API_DEF(SW_API_CPU_VID_EN_GET, fal_cpu_vid_en_get), \
     SW_API_DEF(SW_API_RTD_PPPOE_EN_SET, fal_rtd_pppoe_en_set), \
-    SW_API_DEF(SW_API_RTD_PPPOE_EN_GET, fal_rtd_pppoe_en_get),
+    SW_API_DEF(SW_API_RTD_PPPOE_EN_GET, fal_rtd_pppoe_en_get), \
+    SW_API_DEF(SW_API_GLOBAL_MACADDR_SET, fal_global_macaddr_set), \
+    SW_API_DEF(SW_API_GLOBAL_MACADDR_GET, fal_global_macaddr_get), \
+    SW_API_DEF(SW_API_LLDP_STATUS_SET, fal_lldp_status_set), \
+    SW_API_DEF(SW_API_LLDP_STATUS_GET, fal_lldp_status_get), \
+    SW_API_DEF(SW_API_FRAME_CRC_RESERVE_SET, fal_frame_crc_reserve_set), \
+    SW_API_DEF(SW_API_FRAME_CRC_RESERVE_GET, fal_frame_crc_reserve_get), 
 
 
 
@@ -771,7 +790,13 @@ extern "C" {
     SW_API_DESC(SW_API_CPU_VID_EN_SET) \
     SW_API_DESC(SW_API_CPU_VID_EN_GET) \
     SW_API_DESC(SW_API_RTD_PPPOE_EN_SET) \
-    SW_API_DESC(SW_API_RTD_PPPOE_EN_GET)
+    SW_API_DESC(SW_API_RTD_PPPOE_EN_GET) \
+    SW_API_DESC(SW_API_GLOBAL_MACADDR_SET) \
+    SW_API_DESC(SW_API_GLOBAL_MACADDR_GET) \
+    SW_API_DESC(SW_API_LLDP_STATUS_SET) \
+    SW_API_DESC(SW_API_LLDP_STATUS_GET) \
+    SW_API_DESC(SW_API_FRAME_CRC_RESERVE_SET) \
+    SW_API_DESC(SW_API_FRAME_CRC_RESERVE_GET)
 
 
 #else
@@ -918,7 +943,17 @@ extern "C" {
     SW_API_DEF(SW_API_IP_AGE_TIME_SET, fal_ip_age_time_set), \
     SW_API_DEF(SW_API_IP_AGE_TIME_GET, fal_ip_age_time_get), \
     SW_API_DEF(SW_API_WCMP_HASH_MODE_SET, fal_ip_wcmp_hash_mode_set), \
-    SW_API_DEF(SW_API_WCMP_HASH_MODE_GET, fal_ip_wcmp_hash_mode_get),
+    SW_API_DEF(SW_API_WCMP_HASH_MODE_GET, fal_ip_wcmp_hash_mode_get), \
+    SW_API_DEF(SW_API_IP_VRF_BASE_ADDR_SET, fal_ip_vrf_base_addr_set), \
+    SW_API_DEF(SW_API_IP_VRF_BASE_ADDR_GET, fal_ip_vrf_base_addr_get), \
+    SW_API_DEF(SW_API_IP_VRF_BASE_MASK_SET, fal_ip_vrf_base_mask_set), \
+    SW_API_DEF(SW_API_IP_VRF_BASE_MASK_GET, fal_ip_vrf_base_mask_get), \
+    SW_API_DEF(SW_API_IP_DEFAULT_ROUTE_SET, fal_ip_default_route_set), \
+    SW_API_DEF(SW_API_IP_DEFAULT_ROUTE_GET, fal_ip_default_route_get), \
+    SW_API_DEF(SW_API_IP_HOST_ROUTE_SET, fal_ip_host_route_set), \
+    SW_API_DEF(SW_API_IP_HOST_ROUTE_GET, fal_ip_host_route_get), \
+    SW_API_DEF(SW_API_IP_WCMP_ENTRY_SET, fal_ip_wcmp_entry_set), \
+    SW_API_DEF(SW_API_IP_WCMP_ENTRY_GET, fal_ip_wcmp_entry_get),
 
 #define IP_API_PARAM \
     SW_API_DESC(SW_API_IP_HOST_ADD) \
@@ -947,7 +982,17 @@ extern "C" {
     SW_API_DESC(SW_API_IP_AGE_TIME_SET)  \
     SW_API_DESC(SW_API_IP_AGE_TIME_GET) \
     SW_API_DESC(SW_API_WCMP_HASH_MODE_SET) \
-    SW_API_DESC(SW_API_WCMP_HASH_MODE_GET)
+    SW_API_DESC(SW_API_WCMP_HASH_MODE_GET) \
+    SW_API_DESC(SW_API_IP_VRF_BASE_ADDR_SET) \
+    SW_API_DESC(SW_API_IP_VRF_BASE_ADDR_GET) \
+    SW_API_DESC(SW_API_IP_VRF_BASE_MASK_SET) \
+    SW_API_DESC(SW_API_IP_VRF_BASE_MASK_GET) \
+    SW_API_DESC(SW_API_IP_DEFAULT_ROUTE_SET) \
+    SW_API_DESC(SW_API_IP_DEFAULT_ROUTE_GET) \
+    SW_API_DESC(SW_API_IP_HOST_ROUTE_SET) \
+    SW_API_DESC(SW_API_IP_HOST_ROUTE_GET) \
+    SW_API_DESC(SW_API_IP_WCMP_ENTRY_SET) \
+    SW_API_DESC(SW_API_IP_WCMP_ENTRY_GET)
 #else
 #define IP_API
 #define IP_API_PARAM
@@ -965,6 +1010,11 @@ extern "C" {
     SW_API_DEF(SW_API_NAPT_GET, fal_napt_get), \
     SW_API_DEF(SW_API_NAPT_NEXT, fal_napt_next), \
     SW_API_DEF(SW_API_NAPT_COUNTER_BIND, fal_napt_counter_bind), \
+    SW_API_DEF(SW_API_FLOW_ADD, fal_flow_add), \
+    SW_API_DEF(SW_API_FLOW_DEL, fal_flow_del), \
+    SW_API_DEF(SW_API_FLOW_GET, fal_flow_get), \
+    SW_API_DEF(SW_API_FLOW_NEXT, fal_flow_next), \
+    SW_API_DEF(SW_API_FLOW_COUNTER_BIND, fal_flow_counter_bind), \
     SW_API_DEF(SW_API_NAT_STATUS_SET, fal_nat_status_set), \
     SW_API_DEF(SW_API_NAT_STATUS_GET, fal_nat_status_get), \
     SW_API_DEF(SW_API_NAT_HASH_MODE_SET, fal_nat_hash_mode_set), \
@@ -997,6 +1047,11 @@ extern "C" {
     SW_API_DESC(SW_API_NAPT_GET) \
     SW_API_DESC(SW_API_NAPT_NEXT) \
     SW_API_DESC(SW_API_NAPT_COUNTER_BIND) \
+    SW_API_DESC(SW_API_FLOW_ADD) \
+    SW_API_DESC(SW_API_FLOW_DEL) \
+    SW_API_DESC(SW_API_FLOW_GET) \
+    SW_API_DESC(SW_API_FLOW_NEXT) \
+    SW_API_DESC(SW_API_FLOW_COUNTER_BIND) \
     SW_API_DESC(SW_API_NAT_STATUS_SET) \
     SW_API_DESC(SW_API_NAT_STATUS_GET) \
     SW_API_DESC(SW_API_NAT_HASH_MODE_SET) \

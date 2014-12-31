@@ -288,6 +288,25 @@ extern "C" {
     sw_error_t
     fal_intr_status_mac_linkchg_clear(a_uint32_t dev_id);
 
+	sw_error_t
+    fal_global_macaddr_set(a_uint32_t dev_id, fal_mac_addr_t * addr);
+
+	sw_error_t
+    fal_global_macaddr_get(a_uint32_t dev_id, fal_mac_addr_t * addr);
+
+	sw_error_t
+	fal_lldp_status_set(a_uint32_t dev_id, a_bool_t enable);
+	
+	
+	sw_error_t
+	fal_lldp_status_get(a_uint32_t dev_id, a_bool_t * enable);
+
+	sw_error_t
+	fal_frame_crc_reserve_set(a_uint32_t dev_id, a_bool_t enable);
+	
+	sw_error_t
+	fal_frame_crc_reserve_get(a_uint32_t dev_id, a_bool_t * enable);
+
 #ifdef __cplusplus
 }
 #endif                          /* __cplusplus */

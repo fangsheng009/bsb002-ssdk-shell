@@ -71,7 +71,8 @@ cmd_show_fdb(a_uint32_t *arg_val)
 	        cmd_print_error(rtn);
 	    else
 	        dprintf("\ntotal %d entries\n", cnt);
-    }else if (ssdk_cfg.init_cfg.chip_type == CHIP_ISISC) {
+    }else if ((ssdk_cfg.init_cfg.chip_type == CHIP_ISISC) ||
+		(ssdk_cfg.init_cfg.chip_type == CHIP_DESS)) {
 	    sw_error_t rtn;
 	    a_uint32_t cnt = 0;
 	    fal_fdb_op_t    *fdb_op    = (fal_fdb_op_t *)    (ioctl_buf + sizeof(sw_error_t) / 4);
@@ -191,7 +192,8 @@ cmd_show_vlan(a_uint32_t *arg_val)
 	        cmd_print_error(rtn);
 	    else
 	        dprintf("\ntotal %d entries\n", cnt);
-    }else if (ssdk_cfg.init_cfg.chip_type == CHIP_ISISC) {
+    }else if ((ssdk_cfg.init_cfg.chip_type == CHIP_ISISC) ||
+		(ssdk_cfg.init_cfg.chip_type == CHIP_DESS)) {
 	    sw_error_t rtn;
 	    a_uint32_t rtn_size = 1 ,tmp_vid = FAL_NEXT_ENTRY_FIRST_ID, cnt = 0;
 	    fal_vlan_t *vlan_entry = (fal_vlan_t *) (ioctl_buf + rtn_size);
@@ -457,4 +459,37 @@ cmd_show_napt(a_uint32_t *arg_val)
     return SW_OK;
 }
 
+sw_error_t
+cmd_show_flow(a_uint32_t *arg_val)
+{
+    sw_error_t rtn;
+    a_uint32_t cnt = 0;
+    fal_napt_entry_t *napt_entry = (fal_napt_entry_t *) (ioctl_buf + sizeof(sw_error_t) / 4);
+
+    aos_mem_zero(napt_entry, sizeof (fal_napt_entry_t));
+    napt_entry->entry_id = FAL_NEXT_ENTRY_FIRST_ID;
+    arg_val[0] = SW_API_FLOW_NEXT;
+
+    while (1)
+    {
+        arg_val[1] = (a_uint32_t) ioctl_buf;
+        arg_val[2] = get_devid();
+        arg_val[3] = 0;
+        arg_val[4] = (a_uint32_t) napt_entry;
+
+        rtn = cmd_exec_api(arg_val);
+        if ((SW_OK != rtn)  || (SW_OK != (sw_error_t) (*ioctl_buf)))
+        {
+            break;
+        }
+        cnt++;
+    }
+
+    if((rtn != SW_OK) && (rtn != SW_NO_MORE))
+        cmd_print_error(rtn);
+    else
+        dprintf("\ntotal %d entries\n", cnt);
+
+    return SW_OK;
+}
 

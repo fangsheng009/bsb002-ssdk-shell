@@ -332,6 +332,13 @@ extern "C" {
     sw_error_t
     fal_eg_trans_filter_bypass_en_get(a_uint32_t dev_id, a_uint32_t * enable);
 
+    sw_error_t
+    fal_port_vrf_id_set(a_uint32_t dev_id, fal_port_t port_id,
+                              a_uint32_t vrf_id);
+
+    sw_error_t
+    fal_port_vrf_id_get(a_uint32_t dev_id, fal_port_t port_id,
+                              a_uint32_t * vrf_id);
 
 
 #ifdef __cplusplus

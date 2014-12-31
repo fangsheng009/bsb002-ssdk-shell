@@ -46,6 +46,7 @@ extern "C" {
 #define FAL_NAT_ENTRY_PUBLIC_IP_EN          0x10
 #define FAL_NAT_ENTRY_SOURCE_IP_EN          0x20
 #define FAL_NAT_ENTRY_AGE_EN                0x40
+#define FAL_NAT_ENTRY_SYNC_EN               0x80
 
 
     typedef struct
@@ -68,6 +69,12 @@ extern "C" {
         a_uint32_t     egress_packet;
         a_uint32_t     egress_byte;
         fal_fwd_cmd_t  action;
+		a_uint32_t     load_balance;
+		a_uint32_t     flow_cookie;
+		a_uint32_t     vrf_id;
+		a_uint32_t     aging_sync;
+		a_bool_t       priority_en;
+		a_uint32_t     priority_val;
     } fal_napt_entry_t;
 
 
@@ -89,6 +96,7 @@ extern "C" {
         a_uint32_t     egress_packet;
         a_uint32_t     egress_byte;
         fal_fwd_cmd_t  action;
+		a_uint32_t     vrf_id;
     } fal_nat_entry_t;
 
 
@@ -146,6 +154,26 @@ extern "C" {
 
     sw_error_t
     fal_napt_counter_bind(a_uint32_t dev_id, a_uint32_t entry_id, a_uint32_t cnt_id, a_bool_t enable);
+
+
+    sw_error_t
+    fal_flow_add(a_uint32_t dev_id, fal_napt_entry_t * napt_entry);
+
+
+    sw_error_t
+    fal_flow_del(a_uint32_t dev_id, a_uint32_t del_mode, fal_napt_entry_t * napt_entry);
+
+
+    sw_error_t
+    fal_flow_get(a_uint32_t dev_id, a_uint32_t get_mode, fal_napt_entry_t * napt_entry);
+
+
+    sw_error_t
+    fal_flow_next(a_uint32_t dev_id, a_uint32_t next_mode, fal_napt_entry_t * napt_entry);
+
+
+    sw_error_t
+    fal_flow_counter_bind(a_uint32_t dev_id, a_uint32_t entry_id, a_uint32_t cnt_id, a_bool_t enable);
 
 
     sw_error_t
