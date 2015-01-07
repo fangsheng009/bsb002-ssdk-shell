@@ -31,10 +31,13 @@ extern "C" {
     {
         a_bool_t remark_dscp;
         a_bool_t remark_up;
+        a_bool_t remark_dei;
         a_uint8_t g_dscp;
         a_uint8_t y_dscp;
         a_uint8_t g_up;
         a_uint8_t y_up;
+        a_uint8_t g_dei;
+        a_uint8_t y_dei;
     } fal_egress_remark_table_t;
 
     sw_error_t

@@ -9716,6 +9716,30 @@ cmd_data_check_remark_entry(char *info, void *val, a_uint32_t size)
     }
     while (talk_mode && (SW_OK != rv));
 
+    /* get remark_dei */
+    do
+    {
+        cmd = get_sub_cmd("remark dei", "enable");
+        SW_RTN_ON_NULL_PARAM(cmd);
+
+        if (!strncasecmp(cmd, "quit", 4))
+        {
+            return SW_BAD_VALUE;
+        }
+        else if (!strncasecmp(cmd, "help", 4))
+        {
+            dprintf("usage: <enable/disable>\n");
+            rv = SW_BAD_VALUE;
+        }
+        else
+        {
+            rv = cmd_data_check_enable(cmd, &(pEntry->remark_dei), sizeof(a_bool_t));
+            if (SW_OK != rv)
+                dprintf("usage: <enable/disable>\n");
+        }
+    }
+    while (talk_mode && (SW_OK != rv));
+
     /* get g_dscp */
     do
     {
@@ -9848,6 +9872,73 @@ cmd_data_check_remark_entry(char *info, void *val, a_uint32_t size)
     while (talk_mode && (SW_OK != rv));
     pEntry->y_up = tmp;
 
+    /* get g_dei */
+    do
+    {
+        cmd = get_sub_cmd("green dei", NULL);
+        SW_RTN_ON_NULL_PARAM(cmd);
+
+        if (!strncasecmp(cmd, "quit", 4))
+        {
+            return SW_BAD_VALUE;
+        }
+        else if (!strncasecmp(cmd, "help", 4))
+        {
+            dprintf("usage: the range is 0 -- 1\n");
+            rv = SW_BAD_VALUE;
+        }
+        else
+        {
+            rv = cmd_data_check_uint16(cmd, &tmp, sizeof (a_uint32_t));
+            if (SW_OK != rv)
+            {
+                dprintf("usage: the range is 0 -- 1\n");
+            }
+
+            if (tmp > 1)
+            {
+                dprintf("usage: the range is 0 -- 1\n");
+                rv = SW_OUT_OF_RANGE;
+            }
+        }
+    }
+    while (talk_mode && (SW_OK != rv));
+    pEntry->g_dei = tmp;
+
+    /* get y_dei */
+    do
+    {
+        cmd = get_sub_cmd("yellow dei", NULL);
+        SW_RTN_ON_NULL_PARAM(cmd);
+
+        if (!strncasecmp(cmd, "quit", 4))
+        {
+            return SW_BAD_VALUE;
+        }
+        else if (!strncasecmp(cmd, "help", 4))
+        {
+            dprintf("usage: the range is 0 -- 1\n");
+            rv = SW_BAD_VALUE;
+        }
+        else
+        {
+            rv = cmd_data_check_uint16(cmd, &tmp, sizeof (a_uint32_t));
+            if (SW_OK != rv)
+            {
+                dprintf("usage: the range is 0 -- 1\n");
+            }
+
+            if (tmp > 1)
+            {
+                dprintf("usage: the range is 0 -- 1\n");
+                rv = SW_OUT_OF_RANGE;
+            }
+        }
+    }
+    while (talk_mode && (SW_OK != rv));
+    pEntry->y_dei = tmp;
+
+
 /*
     dprintf("remark_dscp=%d, remark_up=%d, g_dscp=%d, y_dscp=%d\n",
             pEntry->remark_dscp,
@@ -9869,10 +9960,13 @@ cmd_data_print_remark_entry(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t
     dprintf("\n");
     dprintf("[remark dscp]:%s\n", entry->remark_dscp?"enabled":"disabled");
     dprintf("[remark up]:%s\n", entry->remark_up?"enabled":"disabled");
+    dprintf("[remark dei]:%s\n", entry->remark_dei?"enabled":"disabled");
     dprintf("[green dscp]:%d\n", entry->g_dscp);
     dprintf("[yellow dscp]:%d\n", entry->y_dscp);
     dprintf("[green up]:%d\n", entry->g_up);
     dprintf("[yellow up]:%d\n", entry->y_up);
+    dprintf("[green dei]:%d\n", entry->g_dei);
+    dprintf("[yellow dei]:%d\n", entry->y_dei);
 
     return;
 }
