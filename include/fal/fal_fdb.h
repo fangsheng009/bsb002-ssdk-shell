@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -86,6 +86,19 @@ extern "C" {
         INVALID_VLAN_SVL=0,
         INVALID_VLAN_IVL
     } fal_fdb_smode;
+
+	typedef struct
+    {
+        fal_mac_addr_t addr;
+        a_uint16_t    fid;
+        a_uint8_t load_balance;
+    } fal_fdb_rfs_t;
+
+	sw_error_t
+    fal_fdb_rfs_set(a_uint32_t dev_id, fal_fdb_rfs_t * entry);
+
+	sw_error_t
+    fal_fdb_rfs_del(a_uint32_t dev_id, fal_fdb_rfs_t * entry);
 
     sw_error_t
     fal_fdb_add(a_uint32_t dev_id, const fal_fdb_entry_t * entry);

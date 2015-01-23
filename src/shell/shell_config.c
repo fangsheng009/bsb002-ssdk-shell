@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -198,6 +198,8 @@ struct cmd_des_t gcmd_des[] =
             {"ptLearnStatic", "get", "get FDB entry learning static status of a port", "<port_id>", SW_API_FDB_PT_LEARN_STATIC_GET, NULL},
             {"port", "add", "add one port to a FDB entry", "<fid> <macaddr> <port_id>", SW_API_FDB_PORT_ADD, NULL},
             {"port", "del", "del one port from a FDB entry", "<fid> <macaddr> <port_id>", SW_API_FDB_PORT_DEL, NULL},
+			{"fdbrfs", "set", "add a FDB rfs", "", SW_API_FDB_RFS_SET, NULL},
+            {"fdbrfs", "del", "delete a FDB rfs", "", SW_API_FDB_RFS_DEL, NULL},
             {NULL, NULL, NULL, NULL, (int)NULL, NULL}/*end of desc*/
         },
     },
@@ -592,6 +594,10 @@ struct cmd_des_t gcmd_des[] =
             {"hostroute", "get", "get host route entry", "", SW_API_IP_HOST_ROUTE_GET, NULL},
 			{"wcmpentry", "set", "set wcmp entry", "", SW_API_IP_WCMP_ENTRY_SET, NULL},
             {"wcmpentry", "get", "get wcmp entry", "", SW_API_IP_WCMP_ENTRY_GET, NULL},
+			{"rfsip4", "set", "set rfs ip4", "", SW_API_IP_RFS_IP4_SET, NULL},
+			{"rfsip4", "del", "del rfs ip4", "", SW_API_IP_RFS_IP4_DEL, NULL},
+			{"rfsip6", "set", "set rfs ip6", "", SW_API_IP_RFS_IP6_SET, NULL},
+			{"rfsip6", "del", "del rfs ip6", "", SW_API_IP_RFS_IP6_DEL, NULL},
             {NULL, NULL, NULL, NULL, (int)NULL, NULL}/*end of desc*/
         },
     },
@@ -640,6 +646,8 @@ struct cmd_des_t gcmd_des[] =
             {"prvbasemask", "set", "set nat prv base mask", "<ip4 mask>", SW_API_PRV_BASE_MASK_SET, NULL},
             {"prvbasemask", "get", "get nat prv base mask", "", SW_API_PRV_BASE_MASK_GET, NULL},
             {"global", "set", "set global nat function", "<enable|disable>", SW_API_NAT_GLOBAL_SET, NULL},
+			{"flowcookie", "set", "set flow cookie", "", SW_API_FLOW_COOKIE_SET, NULL},
+			{"flowrfs", "set", "set flow rfs", "<action>", SW_API_FLOW_RFS_SET, NULL},
             {NULL, NULL, NULL, NULL, (int)NULL, NULL}/*end of desc*/
         },
     },
