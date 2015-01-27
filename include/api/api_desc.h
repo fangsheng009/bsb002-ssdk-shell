@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -729,6 +729,14 @@ extern "C" {
     SW_PARAM_DEF(SW_API_FDB_PORT_DEL, SW_UINT32, 4, SW_PARAM_IN, "FID"),\
     SW_PARAM_DEF(SW_API_FDB_PORT_DEL, SW_MACADDR, sizeof(fal_mac_addr_t), SW_PARAM_PTR|SW_PARAM_IN, "Address"),\
     SW_PARAM_DEF(SW_API_FDB_PORT_DEL, SW_UINT32, 4, SW_PARAM_IN, "Port ID"),
+
+#define SW_API_FDB_RFS_SET_DESC \
+		SW_PARAM_DEF(SW_API_FDB_RFS_SET, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),\
+		SW_PARAM_DEF(SW_API_FDB_RFS_SET, SW_FDB_RFS, sizeof(fal_fdb_rfs_t), SW_PARAM_PTR|SW_PARAM_IN, "Fdb Rfs"),
+
+#define SW_API_FDB_RFS_DEL_DESC \
+		SW_PARAM_DEF(SW_API_FDB_RFS_DEL, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),\
+		SW_PARAM_DEF(SW_API_FDB_RFS_DEL, SW_FDB_RFS, sizeof(fal_fdb_rfs_t), SW_PARAM_PTR|SW_PARAM_IN, "Fdb Rfs"),
 
 
 
@@ -2111,6 +2119,22 @@ extern "C" {
     SW_PARAM_DEF(SW_API_IP_WCMP_ENTRY_GET, SW_UINT32, 4, SW_PARAM_IN, "Wcmp ID"), \
     SW_PARAM_DEF(SW_API_IP_WCMP_ENTRY_GET, SW_IP_WCMP_ENTRY, sizeof(fal_ip_wcmp_t), SW_PARAM_PTR|SW_PARAM_OUT, "WcmpEntry"),
 
+#define SW_API_IP_RFS_IP4_SET_DESC \
+    SW_PARAM_DEF(SW_API_IP_RFS_IP4_SET, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),  \
+    SW_PARAM_DEF(SW_API_IP_RFS_IP4_SET, SW_IP_RFS_IP4, sizeof(fal_ip4_rfs_t), SW_PARAM_PTR|SW_PARAM_IN, "RfsIp4"),
+
+#define SW_API_IP_RFS_IP6_SET_DESC \
+    SW_PARAM_DEF(SW_API_IP_RFS_IP6_SET, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),  \
+    SW_PARAM_DEF(SW_API_IP_RFS_IP6_SET, SW_IP_RFS_IP6, sizeof(fal_ip6_rfs_t), SW_PARAM_PTR|SW_PARAM_IN, "RfsIp6"),
+
+#define SW_API_IP_RFS_IP4_DEL_DESC \
+    SW_PARAM_DEF(SW_API_IP_RFS_IP4_DEL, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),  \
+    SW_PARAM_DEF(SW_API_IP_RFS_IP4_DEL, SW_IP_RFS_IP4, sizeof(fal_ip4_rfs_t), SW_PARAM_PTR|SW_PARAM_IN, "RfsIp4"),
+
+#define SW_API_IP_RFS_IP6_DEL_DESC \
+    SW_PARAM_DEF(SW_API_IP_RFS_IP6_DEL, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),  \
+    SW_PARAM_DEF(SW_API_IP_RFS_IP6_DEL, SW_IP_RFS_IP6, sizeof(fal_ip6_rfs_t), SW_PARAM_PTR|SW_PARAM_IN, "RfsIp6"),
+
 
 #define SW_API_NAT_ADD_DESC \
     SW_PARAM_DEF(SW_API_NAT_ADD, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),   \
@@ -2175,6 +2199,16 @@ extern "C" {
     SW_PARAM_DEF(SW_API_FLOW_GET, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),   \
     SW_PARAM_DEF(SW_API_FLOW_GET, SW_UINT32, 4, SW_PARAM_IN, "GetMode"),  \
     SW_PARAM_DEF(SW_API_FLOW_GET, SW_FLOWENTRY, sizeof(fal_napt_entry_t), SW_PARAM_PTR|SW_PARAM_IN|SW_PARAM_OUT, "Flowentry"),
+
+#define SW_API_FLOW_COOKIE_SET_DESC \
+    SW_PARAM_DEF(SW_API_FLOW_COOKIE_SET, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),   \
+    SW_PARAM_DEF(SW_API_FLOW_COOKIE_SET, SW_FLOWCOOKIE, sizeof(fal_flow_cookie_t), SW_PARAM_PTR|SW_PARAM_IN, "Flowcookieentry"),
+
+#define SW_API_FLOW_RFS_SET_DESC \
+    SW_PARAM_DEF(SW_API_FLOW_RFS_SET, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),   \
+    SW_PARAM_DEF(SW_API_FLOW_RFS_SET, SW_UINT32, 4, SW_PARAM_IN, "action"), \
+    SW_PARAM_DEF(SW_API_FLOW_RFS_SET, SW_FLOWRFS, sizeof(fal_flow_rfs_t), SW_PARAM_PTR|SW_PARAM_IN, "Flowrfs"),
+
 
 #define SW_API_FLOW_NEXT_DESC \
     SW_PARAM_DEF(SW_API_FLOW_NEXT, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"),   \

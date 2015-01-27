@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -77,6 +77,25 @@ extern "C" {
 		a_uint32_t     priority_val;
     } fal_napt_entry_t;
 
+	typedef struct
+    {
+        a_uint32_t     proto;  /*1 tcp; 2 udp*/
+        fal_ip4_addr_t src_addr;
+        fal_ip4_addr_t dst_addr;
+        a_uint16_t     src_port;
+        a_uint16_t     dst_port;
+		a_uint32_t     flow_cookie;
+    } fal_flow_cookie_t;
+
+	typedef struct
+    {
+        a_uint32_t     proto;  /*1 tcp; 2 udp*/
+        fal_ip4_addr_t src_addr;
+        fal_ip4_addr_t dst_addr;
+        a_uint16_t     src_port;
+        a_uint16_t     dst_port;
+		a_uint8_t     load_balance;
+    } fal_flow_rfs_t;
 
     typedef struct
     {
@@ -256,6 +275,11 @@ extern "C" {
     sw_error_t
     fal_nat_global_set(a_uint32_t dev_id, a_bool_t enable);
 
+	sw_error_t
+    fal_flow_cookie_set(a_uint32_t dev_id, fal_flow_cookie_t * flow_cookie);
+
+	sw_error_t
+    fal_flow_rfs_set(a_uint32_t dev_id, a_uint8_t action, fal_flow_rfs_t * rfs);
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -114,6 +114,11 @@ extern "C" {
         SW_DEFAULT_ROUTE_ENTRY,
         SW_HOST_ROUTE_ENTRY,
         SW_IP_WCMP_ENTRY,
+        SW_IP_RFS_IP4,
+		SW_IP_RFS_IP6,
+		SW_FLOWCOOKIE,
+		SW_FDB_RFS,
+		SW_FLOWRFS,
     } sw_data_type_e;
 
     typedef struct

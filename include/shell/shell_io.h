@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -342,6 +342,20 @@ cmd_data_check_ip_wcmp_entry(char *cmd_str, void * val, a_uint32_t size);
 
 void
 cmd_data_print_ip_wcmp_entry(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
+sw_error_t
+cmd_data_check_ip4_rfs_entry(char *cmd_str, void * val, a_uint32_t size);
+sw_error_t
+cmd_data_check_ip6_rfs_entry(char *cmd_str, void * val, a_uint32_t size);
+sw_error_t
+cmd_data_check_flow_cookie(char *cmd_str, void * val, a_uint32_t size);
+
+sw_error_t
+cmd_data_check_fdb_rfs(char *cmd_str, void * val, a_uint32_t size);
+sw_error_t
+cmd_data_check_flow_rfs(char *cmd_str, void * val, a_uint32_t size);
+
+
 
 #endif
 

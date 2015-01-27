@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -22,6 +22,8 @@
 #define DEFAULT_FLAG "default"
 static char **full_cmdstrp;
 static int talk_mode = 1;
+
+
 
 int
 get_talk_mode(void)
@@ -202,6 +204,11 @@ static sw_data_type_t sw_data_type[] =
     SW_TYPE_DEF(SW_DEFAULT_ROUTE_ENTRY, cmd_data_check_default_route_entry, cmd_data_print_default_route_entry),
     SW_TYPE_DEF(SW_HOST_ROUTE_ENTRY, cmd_data_check_host_route_entry, cmd_data_print_host_route_entry),
     SW_TYPE_DEF(SW_IP_WCMP_ENTRY, cmd_data_check_ip_wcmp_entry, cmd_data_print_ip_wcmp_entry),
+    SW_TYPE_DEF(SW_IP_RFS_IP4, cmd_data_check_ip4_rfs_entry, NULL),
+	SW_TYPE_DEF(SW_IP_RFS_IP6, cmd_data_check_ip6_rfs_entry, NULL),
+	SW_TYPE_DEF(SW_FLOWCOOKIE, cmd_data_check_flow_cookie, NULL),
+	SW_TYPE_DEF(SW_FLOWRFS, cmd_data_check_flow_rfs, NULL),
+	SW_TYPE_DEF(SW_FDB_RFS, cmd_data_check_fdb_rfs, NULL),
 };
 
 sw_data_type_t *
@@ -218,6 +225,45 @@ cmd_data_type_find(sw_data_type_e type)
 
     return NULL;
 }
+
+sw_error_t __cmd_data_check_quit_help(char *cmd, char *usage)
+{
+    sw_error_t ret = SW_OK;
+
+    if (!strncasecmp(cmd, "quit", 4)) {
+        return SW_ABORTED;
+    } else if (!strncasecmp(cmd, "help", 4)) {
+        dprintf("%s", usage);
+        ret = SW_BAD_VALUE;
+    }
+
+    return ret;
+}
+
+sw_error_t __cmd_data_check_complex(char *info, char *defval, char *usage,
+				sw_error_t(*chk_func)(), void *arg_val,
+				a_uint32_t size)
+{
+    sw_error_t ret;
+    char *cmd;
+
+    do {
+        cmd = get_sub_cmd(info, defval);
+        SW_RTN_ON_NULL_PARAM(cmd);
+
+        ret = __cmd_data_check_quit_help(cmd, usage);
+        if (ret == SW_ABORTED)
+            return ret;
+        else if (ret == SW_OK) {
+            ret = chk_func(cmd, arg_val, size);
+            if (ret)
+                dprintf("%s", usage);
+        }
+    } while (talk_mode && (SW_OK != ret));
+
+    return SW_OK;
+}
+
 
 sw_error_t
 cmd_data_check_uint32(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size)
@@ -10404,4 +10450,245 @@ cmd_data_print_ip_wcmp_entry(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_
 			dprintf("\n");
 	}
 }
+
+sw_error_t
+cmd_data_check_ip4_rfs_entry(char *cmd_str, void * val, a_uint32_t size)
+{
+	char *cmd;
+	a_uint32_t tmp;
+	sw_error_t rv;
+	fal_ip4_rfs_t entry;
+
+	aos_mem_zero(&entry, sizeof (fal_ip4_rfs_t));
+
+	rv = __cmd_data_check_complex("mac addr", NULL,
+                        "usage: the format is xx-xx-xx-xx-xx-xx \n",
+                        cmd_data_check_macaddr, &(entry.mac_addr),
+                        sizeof (fal_mac_addr_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("ip4 addr", NULL,
+                            "usage: the format is xx.xx.xx.xx \n",
+                            cmd_data_check_ip4addr, &(entry.ip4_addr),
+                            4);
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("vid", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &(entry.vid),
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("loadbalance", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &tmp,
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+	entry.load_balance = tmp;
+	*(fal_ip4_rfs_t *)val = entry;
+	return SW_OK;
+}
+
+sw_error_t
+cmd_data_check_fdb_rfs(char *cmd_str, void * val, a_uint32_t size)
+{
+	char *cmd;
+	a_uint32_t tmp;
+	sw_error_t rv;
+	fal_fdb_rfs_t entry;
+
+	aos_mem_zero(&entry, sizeof (fal_fdb_rfs_t));
+
+	rv = __cmd_data_check_complex("mac addr", NULL,
+                        "usage: the format is xx-xx-xx-xx-xx-xx \n",
+                        cmd_data_check_macaddr, &(entry.addr),
+                        sizeof (fal_mac_addr_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("fid", NULL,
+                            "usage: the format is xx\n",
+                            cmd_data_check_uint32, &tmp,
+                            sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+	entry.fid = tmp;
+
+	rv = __cmd_data_check_complex("loadbalance", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &tmp,
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	entry.load_balance = tmp;
+
+	*(fal_fdb_rfs_t *)val = entry;
+	return SW_OK;
+}
+
+
+sw_error_t
+cmd_data_check_flow_cookie(char *cmd_str, void * val, a_uint32_t size)
+{
+	char *cmd;
+	a_uint32_t tmp;
+	sw_error_t rv;
+	fal_flow_cookie_t entry;
+
+	aos_mem_zero(&entry, sizeof (fal_flow_cookie_t));
+
+	rv = __cmd_data_check_complex("proto", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &(entry.proto),
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("src addr", NULL,
+                            "usage: the format is xx.xx.xx.xx \n",
+                            cmd_data_check_ip4addr, &(entry.src_addr),
+                            4);
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("dst addr", NULL,
+                            "usage: the format is xx.xx.xx.xx \n",
+                            cmd_data_check_ip4addr, &(entry.dst_addr),
+                            4);
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("src port", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &(entry.src_port),
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("dst port", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &(entry.dst_port),
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("flow cookie", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &(entry.flow_cookie),
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+
+	*(fal_flow_cookie_t *)val = entry;
+	return SW_OK;
+}
+
+sw_error_t
+cmd_data_check_flow_rfs(char *cmd_str, void * val, a_uint32_t size)
+{
+	char *cmd;
+	a_uint32_t tmp;
+	sw_error_t rv;
+	fal_flow_rfs_t entry;
+
+	aos_mem_zero(&entry, sizeof (fal_flow_cookie_t));
+
+	rv = __cmd_data_check_complex("proto", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &(entry.proto),
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("src addr", NULL,
+                            "usage: the format is xx.xx.xx.xx \n",
+                            cmd_data_check_ip4addr, &(entry.src_addr),
+                            4);
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("dst addr", NULL,
+                            "usage: the format is xx.xx.xx.xx \n",
+                            cmd_data_check_ip4addr, &(entry.dst_addr),
+                            4);
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("src port", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &(entry.src_port),
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("dst port", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &(entry.dst_port),
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("flow rfs", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &tmp,
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	entry.load_balance = tmp;
+
+
+	*(fal_flow_rfs_t *)val = entry;
+	return SW_OK;
+}
+
+sw_error_t
+cmd_data_check_ip6_rfs_entry(char *cmd_str, void * val, a_uint32_t size)
+{
+	char *cmd;
+	a_uint32_t tmp;
+	sw_error_t rv;
+	fal_ip6_rfs_t entry;
+
+	aos_mem_zero(&entry, sizeof (fal_ip4_rfs_t));
+
+	rv = __cmd_data_check_complex("mac addr", NULL,
+                        "usage: the format is xx-xx-xx-xx-xx-xx \n",
+                        cmd_data_check_macaddr, &(entry.mac_addr),
+                        sizeof (fal_mac_addr_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("ip6 addr", NULL,
+                            "usage: the format is xxxx::xxxx \n",
+                            cmd_data_check_ip6addr, &(entry.ip6_addr),
+                            16);
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("vid", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &(entry.vid),
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+
+	rv = __cmd_data_check_complex("loadbalance", "0",
+                        "usage: the format is xx \n",
+                        cmd_data_check_uint32, &tmp,
+                        sizeof (a_uint32_t));
+    if (rv)
+        return rv;
+	entry.load_balance = tmp;
+
+	*(fal_ip6_rfs_t *)val = entry;
+	return SW_OK;
+}
+
 

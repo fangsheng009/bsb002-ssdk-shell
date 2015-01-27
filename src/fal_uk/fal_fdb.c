@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -343,4 +343,23 @@ fal_fdb_port_del(a_uint32_t dev_id, a_uint32_t fid, fal_mac_addr_t * addr, fal_p
     rv = sw_uk_exec(SW_API_FDB_PORT_DEL, dev_id, fid, addr, port_id);
     return rv;
 }
+
+sw_error_t
+fal_fdb_rfs_set(a_uint32_t dev_id, fal_fdb_rfs_t *rfs)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FDB_RFS_SET, dev_id, (a_uint32_t)rfs);
+    return rv;
+}
+
+sw_error_t
+fal_fdb_rfs_del(a_uint32_t dev_id, fal_fdb_rfs_t *rfs)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FDB_RFS_DEL, dev_id, (a_uint32_t)rfs);
+    return rv;
+}
+
 
