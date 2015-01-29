@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -295,7 +295,9 @@ extern "C" {
     SW_API_DEF(SW_API_FDB_PT_LEARN_STATIC_SET,   fal_fdb_port_learn_static_set), \
     SW_API_DEF(SW_API_FDB_PT_LEARN_STATIC_GET,   fal_fdb_port_learn_static_get), \
     SW_API_DEF(SW_API_FDB_PORT_ADD,   fal_fdb_port_add), \
-    SW_API_DEF(SW_API_FDB_PORT_DEL,   fal_fdb_port_del),
+    SW_API_DEF(SW_API_FDB_PORT_DEL,   fal_fdb_port_del), \
+    SW_API_DEF(SW_API_FDB_RFS_SET,   fal_fdb_rfs_set),   \
+    SW_API_DEF(SW_API_FDB_RFS_DEL,   fal_fdb_rfs_del),
 
 #define FDB_API_PARAM \
     SW_API_DESC(SW_API_FDB_ADD) \
@@ -332,7 +334,9 @@ extern "C" {
     SW_API_DESC(SW_API_FDB_PT_LEARN_STATIC_SET) \
     SW_API_DESC(SW_API_FDB_PT_LEARN_STATIC_GET) \
     SW_API_DESC(SW_API_FDB_PORT_ADD)  \
-    SW_API_DESC(SW_API_FDB_PORT_DEL)
+    SW_API_DESC(SW_API_FDB_PORT_DEL)  \
+    SW_API_DESC(SW_API_FDB_RFS_SET)  \
+    SW_API_DESC(SW_API_FDB_RFS_DEL)
 #else
 #define FDB_API
 #define FDB_API_PARAM
@@ -953,7 +957,11 @@ extern "C" {
     SW_API_DEF(SW_API_IP_HOST_ROUTE_SET, fal_ip_host_route_set), \
     SW_API_DEF(SW_API_IP_HOST_ROUTE_GET, fal_ip_host_route_get), \
     SW_API_DEF(SW_API_IP_WCMP_ENTRY_SET, fal_ip_wcmp_entry_set), \
-    SW_API_DEF(SW_API_IP_WCMP_ENTRY_GET, fal_ip_wcmp_entry_get),
+    SW_API_DEF(SW_API_IP_WCMP_ENTRY_GET, fal_ip_wcmp_entry_get), \
+    SW_API_DEF(SW_API_IP_RFS_IP4_SET, fal_ip_rfs_ip4_rule_set), \
+	SW_API_DEF(SW_API_IP_RFS_IP6_SET, fal_ip_rfs_ip6_rule_set), \
+	SW_API_DEF(SW_API_IP_RFS_IP4_DEL, fal_ip_rfs_ip4_rule_del), \
+	SW_API_DEF(SW_API_IP_RFS_IP6_DEL, fal_ip_rfs_ip6_rule_del),
 
 #define IP_API_PARAM \
     SW_API_DESC(SW_API_IP_HOST_ADD) \
@@ -992,7 +1000,11 @@ extern "C" {
     SW_API_DESC(SW_API_IP_HOST_ROUTE_SET) \
     SW_API_DESC(SW_API_IP_HOST_ROUTE_GET) \
     SW_API_DESC(SW_API_IP_WCMP_ENTRY_SET) \
-    SW_API_DESC(SW_API_IP_WCMP_ENTRY_GET)
+    SW_API_DESC(SW_API_IP_WCMP_ENTRY_GET) \
+	SW_API_DESC(SW_API_IP_RFS_IP4_SET)    \
+	SW_API_DESC(SW_API_IP_RFS_IP6_SET)    \
+	SW_API_DESC(SW_API_IP_RFS_IP4_DEL)    \
+	SW_API_DESC(SW_API_IP_RFS_IP6_DEL)
 #else
 #define IP_API
 #define IP_API_PARAM
@@ -1034,7 +1046,9 @@ extern "C" {
     SW_API_DEF(SW_API_NAT_UNK_SESSION_CMD_GET, fal_nat_unk_session_cmd_get), \
     SW_API_DEF(SW_API_PRV_BASE_MASK_SET, fal_nat_prv_base_mask_set), \
     SW_API_DEF(SW_API_PRV_BASE_MASK_GET, fal_nat_prv_base_mask_get), \
-    SW_API_DEF(SW_API_NAT_GLOBAL_SET, fal_nat_global_set),
+    SW_API_DEF(SW_API_NAT_GLOBAL_SET, fal_nat_global_set),          \
+    SW_API_DEF(SW_API_FLOW_COOKIE_SET, fal_flow_cookie_set),    \
+    SW_API_DEF(SW_API_FLOW_RFS_SET, fal_flow_rfs_set),
 
 #define NAT_API_PARAM \
     SW_API_DESC(SW_API_NAT_ADD) \
@@ -1071,7 +1085,9 @@ extern "C" {
     SW_API_DESC(SW_API_NAT_UNK_SESSION_CMD_GET) \
     SW_API_DESC(SW_API_PRV_BASE_MASK_SET) \
     SW_API_DESC(SW_API_PRV_BASE_MASK_GET) \
-    SW_API_DESC(SW_API_NAT_GLOBAL_SET)
+    SW_API_DESC(SW_API_NAT_GLOBAL_SET)    \
+    SW_API_DESC(SW_API_FLOW_COOKIE_SET)   \
+    SW_API_DESC(SW_API_FLOW_RFS_SET)
 #else
 #define NAT_API
 #define NAT_API_PARAM

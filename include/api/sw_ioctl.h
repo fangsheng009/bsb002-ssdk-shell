@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -181,6 +181,8 @@ extern "C" {
 #define SW_API_FDB_PORT_DEL                (32  + SW_API_FDB_OFFSET)
 #define SW_API_FDB_VLAN_IVL_SVL_SET        (33  + SW_API_FDB_OFFSET)
 #define SW_API_FDB_VLAN_IVL_SVL_GET        (34  + SW_API_FDB_OFFSET)
+#define SW_API_FDB_RFS_SET                 (35  + SW_API_FDB_OFFSET)
+#define SW_API_FDB_RFS_DEL                 (36  + SW_API_FDB_OFFSET)
 
 
     /*acl*/
@@ -494,6 +496,11 @@ extern "C" {
 #define SW_API_IP_HOST_ROUTE_GET    (34  + SW_API_IP_OFFSET)
 #define SW_API_IP_WCMP_ENTRY_SET    (35  + SW_API_IP_OFFSET)
 #define SW_API_IP_WCMP_ENTRY_GET    (36  + SW_API_IP_OFFSET)
+#define SW_API_IP_RFS_IP4_SET       (37  + SW_API_IP_OFFSET)
+#define SW_API_IP_RFS_IP6_SET       (38  + SW_API_IP_OFFSET)
+#define SW_API_IP_RFS_IP4_DEL       (39  + SW_API_IP_OFFSET)
+#define SW_API_IP_RFS_IP6_DEL       (40  + SW_API_IP_OFFSET)
+
 
 
     /* nat */
@@ -533,6 +540,8 @@ extern "C" {
 #define SW_API_FLOW_GET              (32  + SW_API_NAT_OFFSET)
 #define SW_API_FLOW_NEXT             (33  + SW_API_NAT_OFFSET)
 #define SW_API_FLOW_COUNTER_BIND     (34  + SW_API_NAT_OFFSET)
+#define SW_API_FLOW_COOKIE_SET       (35  + SW_API_NAT_OFFSET)
+#define SW_API_FLOW_RFS_SET          (36  + SW_API_NAT_OFFSET)
 
 
     /* trunk */

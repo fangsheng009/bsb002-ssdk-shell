@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2014, 2015, The Linux Foundation. All rights reserved.
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
  * above copyright notice and this permission notice appear in all copies.
@@ -336,3 +336,23 @@ fal_nat_global_set(a_uint32_t dev_id, a_bool_t enable)
     rv = sw_uk_exec(SW_API_NAT_GLOBAL_SET, dev_id, (a_uint32_t) enable);
     return rv;
 }
+
+sw_error_t
+fal_flow_cookie_set(a_uint32_t dev_id, fal_flow_cookie_t * flow_cookie)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FLOW_COOKIE_SET, dev_id, (a_uint32_t) flow_cookie);
+    return rv;
+}
+
+sw_error_t
+fal_flow_rfs_set(a_uint32_t dev_id, a_uint8_t action, fal_flow_rfs_t * rfs)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_FLOW_RFS_SET, dev_id, (a_uint32_t)action, (a_uint32_t)rfs);
+    return rv;
+}
+
+
