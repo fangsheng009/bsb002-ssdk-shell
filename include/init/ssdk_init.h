@@ -87,6 +87,13 @@ extern "C" {
 
     typedef struct
     {
+        a_uint32_t  cpu_bmp;
+        a_uint32_t  lan_bmp;
+        a_uint32_t  wan_bmp;
+    } ssdk_port_cfg;
+
+    typedef struct
+    {
         hsl_init_mode   cpu_mode;
         hsl_access_mode reg_mode;
         hsl_reg_func    reg_func;
@@ -101,6 +108,8 @@ extern "C" {
 
         /* chip specific parameter */
         void *          chip_spec_cfg;
+        /* port cfg */
+        ssdk_port_cfg   port_cfg;
     } ssdk_init_cfg;
 
 #if defined ATHENA
