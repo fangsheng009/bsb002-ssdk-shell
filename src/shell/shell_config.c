@@ -598,6 +598,10 @@ struct cmd_des_t gcmd_des[] =
 			{"rfsip4", "del", "del rfs ip4", "", SW_API_IP_RFS_IP4_DEL, NULL},
 			{"rfsip6", "set", "set rfs ip6", "", SW_API_IP_RFS_IP6_SET, NULL},
 			{"rfsip6", "del", "del rfs ip6", "", SW_API_IP_RFS_IP6_DEL, NULL},
+            {"defaultflowcmd", "set", "set default flow command", "<vrf id> <lan2lan|wan2lan|lan2wan|wan2wan> <forward|drop|rdtcpu|admit_all>", SW_API_IP_DEFAULT_FLOW_CMD_SET, NULL},
+            {"defaultflowcmd", "get", "get default flow command", "<vrf id> <lan2lan|wan2lan|lan2wan|wan2wan>", SW_API_IP_DEFAULT_FLOW_CMD_GET, NULL},
+            {"defaultrtflowcmd", "set", "set default route flow command", "<vrf id> <lan2lan|wan2lan|lan2wan|wan2wan> <forward|drop|rdtcpu|admit_all>", SW_API_IP_DEFAULT_RT_FLOW_CMD_SET, NULL},
+            {"defaultrtflowcmd", "get", "get default route flow command", "<vrf id> <lan2lan|wan2lan|lan2wan|wan2wan>", SW_API_IP_DEFAULT_RT_FLOW_CMD_GET, NULL},
             {NULL, NULL, NULL, NULL, (int)NULL, NULL}/*end of desc*/
         },
     },

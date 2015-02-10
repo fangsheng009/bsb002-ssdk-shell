@@ -961,7 +961,11 @@ extern "C" {
     SW_API_DEF(SW_API_IP_RFS_IP4_SET, fal_ip_rfs_ip4_rule_set), \
 	SW_API_DEF(SW_API_IP_RFS_IP6_SET, fal_ip_rfs_ip6_rule_set), \
 	SW_API_DEF(SW_API_IP_RFS_IP4_DEL, fal_ip_rfs_ip4_rule_del), \
-	SW_API_DEF(SW_API_IP_RFS_IP6_DEL, fal_ip_rfs_ip6_rule_del),
+	SW_API_DEF(SW_API_IP_RFS_IP6_DEL, fal_ip_rfs_ip6_rule_del), \
+    SW_API_DEF(SW_API_IP_DEFAULT_FLOW_CMD_SET, fal_default_flow_cmd_set), \
+    SW_API_DEF(SW_API_IP_DEFAULT_FLOW_CMD_GET, fal_default_flow_cmd_get), \
+    SW_API_DEF(SW_API_IP_DEFAULT_RT_FLOW_CMD_SET, fal_default_rt_flow_cmd_set), \
+    SW_API_DEF(SW_API_IP_DEFAULT_RT_FLOW_CMD_GET, fal_default_rt_flow_cmd_get),
 
 #define IP_API_PARAM \
     SW_API_DESC(SW_API_IP_HOST_ADD) \
@@ -1004,7 +1008,11 @@ extern "C" {
 	SW_API_DESC(SW_API_IP_RFS_IP4_SET)    \
 	SW_API_DESC(SW_API_IP_RFS_IP6_SET)    \
 	SW_API_DESC(SW_API_IP_RFS_IP4_DEL)    \
-	SW_API_DESC(SW_API_IP_RFS_IP6_DEL)
+	SW_API_DESC(SW_API_IP_RFS_IP6_DEL)    \
+    SW_API_DESC(SW_API_IP_DEFAULT_FLOW_CMD_SET) \
+    SW_API_DESC(SW_API_IP_DEFAULT_FLOW_CMD_GET) \
+    SW_API_DESC(SW_API_IP_DEFAULT_RT_FLOW_CMD_SET) \
+    SW_API_DESC(SW_API_IP_DEFAULT_RT_FLOW_CMD_GET)
 #else
 #define IP_API
 #define IP_API_PARAM
