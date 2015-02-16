@@ -158,6 +158,8 @@ static sw_data_type_t sw_data_type[] =
     SW_TYPE_DEF(SW_STP, cmd_data_check_stp_state, cmd_data_print_stp_state),
     SW_TYPE_DEF(SW_LEAKY, cmd_data_check_leaky, cmd_data_print_leaky),
     SW_TYPE_DEF(SW_MACCMD, cmd_data_check_maccmd, cmd_data_print_maccmd),
+    SW_TYPE_DEF(SW_FLOWCMD, cmd_data_check_flowcmd, cmd_data_print_flowcmd),
+    SW_TYPE_DEF(SW_FLOWTYPE, cmd_data_check_flowtype, cmd_data_print_flowtype),
     SW_TYPE_DEF(SW_UINT_A, cmd_data_check_uinta, cmd_data_print_uinta),
     SW_TYPE_DEF(SW_ACLRULE, cmd_data_check_aclrule, cmd_data_print_aclrule),
     SW_TYPE_DEF(SW_LEDPATTERN, cmd_data_check_ledpattern, cmd_data_print_ledpattern),
@@ -1369,6 +1371,128 @@ cmd_data_print_maccmd(char * param_name, a_uint32_t * buf, a_uint32_t size)
     else if (*(a_uint32_t *) buf == FAL_MAC_RDT_TO_CPU)
     {
         dprintf("RDTCPU");
+    }
+    else
+    {
+        dprintf("UNKNOWN VALUE");
+    }
+}
+
+/*flow*/
+sw_error_t
+cmd_data_check_flowcmd(char *cmdstr, fal_default_flow_cmd_t * val, a_uint32_t size)
+{
+    if (NULL == cmdstr)
+    {
+        return SW_BAD_VALUE;
+    }
+
+    if (0 == cmdstr[0])
+    {
+        *val = FAL_DEFAULT_FLOW_FORWARD;   //defualt
+    }
+    else if (!strcasecmp(cmdstr, "forward"))
+    {
+        *val = FAL_DEFAULT_FLOW_FORWARD;
+    }
+    else if (!strcasecmp(cmdstr, "drop"))
+    {
+        *val = FAL_DEFAULT_FLOW_DROP;
+    }
+    else if (!strcasecmp(cmdstr, "rdtcpu"))
+    {
+        *val = FAL_DEFAULT_FLOW_RDT_TO_CPU;
+    }
+    else if (!strcasecmp(cmdstr, "admit_all"))
+    {
+        *val = FAL_DEFAULT_FLOW_ADMIT_ALL;
+    }
+    else
+    {
+        return SW_BAD_VALUE;
+    }
+
+    return SW_OK;
+}
+
+void
+cmd_data_print_flowcmd(char * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("[%s]:", param_name);
+    if (*(a_uint32_t *) buf == FAL_DEFAULT_FLOW_FORWARD)
+    {
+        dprintf("FORWARD");
+    }
+    else if (*(a_uint32_t *) buf == FAL_DEFAULT_FLOW_DROP)
+    {
+        dprintf("DROP");
+    }
+    else if (*(a_uint32_t *) buf == FAL_DEFAULT_FLOW_RDT_TO_CPU)
+    {
+        dprintf("RDTCPU");
+    }
+    else if (*(a_uint32_t *) buf == FAL_DEFAULT_FLOW_ADMIT_ALL)
+    {
+        dprintf("ADMIT_ALL");
+    }
+    else
+    {
+        dprintf("UNKNOWN VALUE");
+    }
+}
+
+sw_error_t
+cmd_data_check_flowtype(char *cmd_str, fal_flow_type_t * arg_val,
+                        a_uint32_t size)
+{
+    if (NULL == cmd_str)
+    {
+        return SW_BAD_VALUE;
+    }
+
+    if (!strcasecmp(cmd_str, "lan2lan"))
+    {
+        *arg_val = FAL_FLOW_LAN_TO_LAN;
+    }
+    else if (!strcasecmp(cmd_str, "wan2lan"))
+    {
+        *arg_val = FAL_FLOW_WAN_TO_LAN;
+    }
+    else if (!strcasecmp(cmd_str, "lan2wan"))
+    {
+        *arg_val = FAL_FLOW_LAN_TO_WAN;
+    }
+    else if (!strcasecmp(cmd_str, "wan2wan"))
+    {
+        *arg_val = FAL_FLOW_WAN_TO_WAN;
+    }
+    else
+    {
+        return SW_BAD_VALUE;
+    }
+
+    return SW_OK;
+}
+
+void
+cmd_data_print_flowtype(char * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("[%s]:", param_name);
+    if (*(a_uint32_t *) buf == FAL_FLOW_LAN_TO_LAN)
+    {
+        dprintf("lan2lan");
+    }
+    else if (*(a_uint32_t *) buf == FAL_FLOW_WAN_TO_LAN)
+    {
+        dprintf("wan2lan");
+    }
+    else if (*(a_uint32_t *) buf == FAL_FLOW_LAN_TO_WAN)
+    {
+        dprintf("lan2wan");
+    }
+    else if (*(a_uint32_t *) buf == FAL_FLOW_WAN_TO_WAN)
+    {
+        dprintf("wan2wan");
     }
     else
     {

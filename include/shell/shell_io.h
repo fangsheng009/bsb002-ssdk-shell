@@ -113,7 +113,14 @@ sw_error_t cmd_data_check_maccmd(char *cmdstr, fal_fwd_cmd_t * val,
                                  a_uint32_t size);
 void cmd_data_print_maccmd(char * param_name, a_uint32_t * buf,
                            a_uint32_t size);
-
+sw_error_t cmd_data_check_flowcmd(char *cmdstr, fal_default_flow_cmd_t * val,
+                                 a_uint32_t size);
+void cmd_data_print_flowcmd(char *param_name, a_uint32_t * buf,
+                                 a_uint32_t size);
+sw_error_t cmd_data_check_flowtype(char *cmdstr, fal_flow_type_t * val,
+                                 a_uint32_t size);
+void cmd_data_print_flowtype(char *param_name, a_uint32_t * buf,
+                                 a_uint32_t size);
 sw_error_t cmd_data_check_aclrule(char *info, void *val, a_uint32_t size);
 
 void cmd_data_print_aclrule(char * param_name, a_uint32_t * buf,

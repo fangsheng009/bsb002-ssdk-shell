@@ -66,6 +66,8 @@ extern "C" {
         SW_STP,
         SW_LEAKY,
         SW_MACCMD,
+        SW_FLOWTYPE,
+        SW_FLOWCMD,
         SW_UINT_A,
         SW_ACLRULE,
         SW_LEDPATTERN,

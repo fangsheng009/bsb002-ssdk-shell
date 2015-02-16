@@ -400,5 +400,43 @@ fal_ip_rfs_ip6_rule_del(a_uint32_t dev_id,
 	return rv;
 }
 
+sw_error_t
+fal_default_flow_cmd_set(a_uint32_t dev_id, a_uint32_t vrf_id,
+			fal_flow_type_t type, fal_default_flow_cmd_t cmd)
+{
+	sw_error_t rv;
 
+	rv = sw_uk_exec(SW_API_IP_DEFAULT_FLOW_CMD_SET, dev_id, vrf_id, type, (a_uint32_t) cmd);
+	return rv;
+}
+
+sw_error_t
+fal_default_flow_cmd_get(a_uint32_t dev_id, a_uint32_t vrf_id,
+			fal_flow_type_t type, fal_default_flow_cmd_t * cmd)
+{
+	sw_error_t rv;
+
+	rv = sw_uk_exec(SW_API_IP_DEFAULT_FLOW_CMD_GET, dev_id, vrf_id, type, (a_uint32_t) cmd);
+	return rv;
+}
+
+sw_error_t
+fal_default_rt_flow_cmd_set(a_uint32_t dev_id, a_uint32_t vrf_id,
+			fal_flow_type_t type, fal_default_flow_cmd_t cmd)
+{
+	sw_error_t rv;
+
+	rv = sw_uk_exec(SW_API_IP_DEFAULT_RT_FLOW_CMD_SET, dev_id, vrf_id, type, (a_uint32_t) cmd);
+	return rv;
+}
+
+sw_error_t
+fal_default_rt_flow_cmd_get(a_uint32_t dev_id, a_uint32_t vrf_id,
+			fal_flow_type_t type, fal_default_flow_cmd_t * cmd)
+{
+	sw_error_t rv;
+
+	rv = sw_uk_exec(SW_API_IP_DEFAULT_RT_FLOW_CMD_GET, dev_id, vrf_id, type, (a_uint32_t) cmd);
+	return rv;
+}
 
