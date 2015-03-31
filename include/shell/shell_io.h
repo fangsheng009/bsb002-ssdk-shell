@@ -41,6 +41,8 @@ sw_error_t cmd_data_check_uint32(char *cmd_str, a_uint32_t * arg_val,
                                  a_uint32_t size);
 sw_error_t cmd_data_check_uint16(char *cmd_str, a_uint32_t * arg_val,
                                  a_uint32_t size);
+sw_error_t cmd_data_check_uint8(char *cmd_str, a_uint32_t * arg_val,
+                                 a_uint32_t size);
 sw_error_t cmd_data_check_enable(char *cmd_str, a_uint32_t * arg_val,
                                  a_uint32_t size);
 sw_error_t cmd_data_check_pbmp(char *cmd_str, a_uint32_t * arg_val,
@@ -61,6 +63,8 @@ sw_error_t cmd_data_check_macaddr(char *cmdstr, void *val, a_uint32_t size);
 void cmd_data_print_uint32(a_uint8_t * param_name, a_uint32_t * buf,
                            a_uint32_t size);
 void cmd_data_print_uint16(a_uint8_t * param_name, a_uint32_t * buf,
+                           a_uint32_t size);
+void cmd_data_print_uint8(a_uint8_t * param_name, a_uint32_t * buf,
                            a_uint32_t size);
 void cmd_data_print_enable(a_uint8_t * param_name, a_uint32_t * buf,
                            a_uint32_t size);

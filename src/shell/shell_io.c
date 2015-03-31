@@ -133,7 +133,7 @@ is_dec(char c)
 
 static sw_data_type_t sw_data_type[] =
 {
-    SW_TYPE_DEF(SW_UINT8, NULL, NULL),
+    SW_TYPE_DEF(SW_UINT8, cmd_data_check_uint8, cmd_data_print_uint8),
     SW_TYPE_DEF(SW_INT8, NULL, NULL),
     SW_TYPE_DEF(SW_UINT16, cmd_data_check_uint16, cmd_data_print_uint16),
     SW_TYPE_DEF(SW_INT16, NULL, NULL),
@@ -264,6 +264,37 @@ sw_error_t __cmd_data_check_complex(char *info, char *defval, char *usage,
     } while (talk_mode && (SW_OK != ret));
 
     return SW_OK;
+}
+
+sw_error_t
+cmd_data_check_uint8(char *cmd_str, a_uint32_t *arg_val, a_uint32_t size)
+{
+    if (cmd_str == NULL)
+        return SW_BAD_PARAM;
+
+    if (0 == cmd_str[0])
+    {
+        return SW_BAD_VALUE;
+    }
+
+    if (cmd_str[0] == '0' && (cmd_str[1] == 'x' || cmd_str[1] == 'X'))
+        sscanf(cmd_str, "%x", arg_val);
+    else
+        sscanf(cmd_str, "%d", arg_val);
+
+    if (255 < *arg_val)
+    {
+        return SW_BAD_PARAM;
+    }
+
+    return SW_OK;
+}
+
+void
+cmd_data_print_uint8(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("[%s]:0x%x", param_name, *(a_uint8_t *) buf);
+
 }
 
 
