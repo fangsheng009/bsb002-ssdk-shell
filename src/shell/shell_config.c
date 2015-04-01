@@ -68,8 +68,8 @@ struct cmd_des_t gcmd_des[] =
             {"ptslinkstatus", "get", "get link status of all ports", "", SW_API_PTS_LINK_STATUS_GET, NULL},
 			{"congedrop", "set", "set congestion drop of port queue", "<port_id> <queue_id> <enable|disable>", SW_API_PT_CONGESTION_DROP_SET, NULL},
 			{"congedrop", "get", "get congestion drop of port queue", "<port_id> <queue_id>", SW_API_PT_CONGESTION_DROP_GET, NULL},
-			{"ringfcthres", "set", "set ring flow ctrl of ring", "<port_id> <ring_id> <on_thres> <off_thres>", SW_API_PT_RING_FLOW_CTRL_THRES_SET, NULL},
-			{"ringfcthres", "get", "get ring flow ctrl of ring", "<port_id> <ring_id>", SW_API_PT_RING_FLOW_CTRL_THRES_GET, NULL},
+			{"ringfcthres", "set", "set ring flow ctrl of ring", "<ring_id> <on_thres> <off_thres>", SW_API_PT_RING_FLOW_CTRL_THRES_SET, NULL},
+			{"ringfcthres", "get", "get ring flow ctrl of ring", "<ring_id>", SW_API_PT_RING_FLOW_CTRL_THRES_GET, NULL},
             {NULL, NULL, NULL, NULL, (int)NULL, NULL},/*end of desc*/
         },
     },
