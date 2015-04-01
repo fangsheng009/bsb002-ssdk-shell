@@ -110,6 +110,7 @@ extern "C" {
         void *          chip_spec_cfg;
         /* port cfg */
         ssdk_port_cfg   port_cfg;
+        a_uint32_t      mac_mode;
     } ssdk_init_cfg;
 
 #if defined ATHENA
