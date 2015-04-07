@@ -366,6 +366,35 @@ cmd_data_check_fdb_rfs(char *cmd_str, void * val, a_uint32_t size);
 sw_error_t
 cmd_data_check_flow_rfs(char *cmd_str, void * val, a_uint32_t size);
 
+sw_error_t
+cmd_data_check_crossover_mode(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size);
+
+sw_error_t
+cmd_data_check_crossover_status(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size);
+
+sw_error_t
+cmd_data_check_prefer_medium(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size);
+
+sw_error_t
+cmd_data_check_fiber_mode(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size);
+
+sw_error_t
+cmd_data_check_interface_mode(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size);
+
+void
+cmd_data_print_crossover_mode(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
+void
+cmd_data_print_crossover_status(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
+void
+cmd_data_print_prefer_medium(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
+void
+cmd_data_print_fiber_mode(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
+void
+cmd_data_print_interface_mode(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
 
 
 #endif

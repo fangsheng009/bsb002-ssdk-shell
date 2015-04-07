@@ -469,5 +469,256 @@ fal_ring_flow_ctrl_thres_get(a_uint32_t dev_id, a_uint32_t ring_id, a_uint8_t *o
     return rv;
 }
 
+sw_error_t
+fal_port_8023az_set(a_uint32_t dev_id, fal_port_t port_id,
+                       a_bool_t enable)
+{
+    sw_error_t rv;
 
+    rv = sw_uk_exec(SW_API_PT_8023AZ_SET, dev_id, port_id,
+                    (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_port_8023az_get(a_uint32_t dev_id, fal_port_t port_id,
+                       a_bool_t * enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_8023AZ_GET, dev_id, port_id,
+                    (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_port_mdix_set(a_uint32_t dev_id, fal_port_t port_id,
+                        fal_port_mdix_mode_t mode)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_MDIX_SET, dev_id, port_id, (a_uint32_t)mode);
+    return rv;
+}
+
+sw_error_t
+fal_port_mdix_get(a_uint32_t dev_id, fal_port_t port_id,
+                        fal_port_mdix_mode_t * mode)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_MDIX_GET, dev_id, port_id, (a_uint32_t)mode);
+    return rv;
+}
+
+sw_error_t
+fal_port_mdix_status_get(a_uint32_t dev_id, fal_port_t port_id,
+                        fal_port_mdix_status_t * mode)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_MDIX_STATUS_GET, dev_id, port_id, (a_uint32_t)mode);
+    return rv;
+}
+
+sw_error_t
+fal_port_combo_prefer_medium_set(a_uint32_t dev_id, fal_port_t port_id,
+                        fal_port_medium_t medium)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_COMBO_PREFER_MEDIUM_SET, dev_id, port_id, (a_uint32_t)medium);
+    return rv;
+}
+
+sw_error_t
+fal_port_combo_prefer_medium_get(a_uint32_t dev_id, fal_port_t port_id,
+                        fal_port_medium_t * medium)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_COMBO_PREFER_MEDIUM_GET, dev_id, port_id, (a_uint32_t)medium);
+    return rv;
+}
+
+sw_error_t
+fal_port_combo_medium_status_get(a_uint32_t dev_id, fal_port_t port_id,
+                        fal_port_medium_t * medium)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_COMBO_MEDIUM_STATUS_GET, dev_id, port_id, (a_uint32_t)medium);
+    return rv;
+}
+
+sw_error_t
+fal_port_combo_fiber_mode_set(a_uint32_t dev_id, fal_port_t port_id,
+                        fal_port_fiber_mode_t  mode)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_COMBO_FIBER_MODE_SET, dev_id, port_id, (a_uint32_t)mode);
+    return rv;
+}
+
+sw_error_t
+fal_port_combo_fiber_mode_get(a_uint32_t dev_id, fal_port_t port_id,
+                        fal_port_fiber_mode_t * mode)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_COMBO_FIBER_MODE_GET, dev_id, port_id, (a_uint32_t)mode);
+    return rv;
+}
+
+sw_error_t
+fal_port_local_loopback_set(a_uint32_t dev_id, fal_port_t port_id,
+                       a_bool_t enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_LOCAL_LOOPBACK_SET, dev_id, port_id,
+                    (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_port_local_loopback_get(a_uint32_t dev_id, fal_port_t port_id,
+                       a_bool_t * enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_LOCAL_LOOPBACK_GET, dev_id, port_id,
+                    (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_port_remote_loopback_set(a_uint32_t dev_id, fal_port_t port_id,
+                       a_bool_t enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_REMOTE_LOOPBACK_SET, dev_id, port_id,
+                    (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_port_remote_loopback_get(a_uint32_t dev_id, fal_port_t port_id,
+                       a_bool_t * enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_REMOTE_LOOPBACK_GET, dev_id, port_id,
+                    (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_port_reset(a_uint32_t dev_id, fal_port_t port_id)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_RESET, dev_id, port_id);
+    return rv;
+}
+
+sw_error_t
+fal_port_power_off(a_uint32_t dev_id, fal_port_t port_id)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_POWER_OFF, dev_id, port_id);
+    return rv;
+}
+
+sw_error_t
+fal_port_power_on(a_uint32_t dev_id, fal_port_t port_id)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_POWER_ON, dev_id, port_id);
+    return rv;
+}
+
+    sw_error_t
+    fal_port_magic_frame_mac_set (a_uint32_t dev_id, fal_port_t port_id,
+				   fal_mac_addr_t * mac)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_MAGIC_FRAME_MAC_SET, dev_id, port_id,(a_uint32_t) mac);
+    return rv;
+
+}
+
+   sw_error_t
+   fal_port_magic_frame_mac_get (a_uint32_t dev_id, fal_port_t port_id,
+				   fal_mac_addr_t * mac)
+{
+
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_MAGIC_FRAME_MAC_GET, dev_id, port_id,(a_uint32_t) mac);
+    return rv;
+
+
+}
+ sw_error_t
+    fal_port_phy_id_get (a_uint32_t dev_id, fal_port_t port_id,
+		      a_uint16_t * org_id, a_uint16_t * rev_id)
+ {
+             sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_WOL_STATUS_GET, dev_id, port_id, (a_uint32_t) org_id, (a_uint32_t) rev_id);
+    return rv;
+ }
+ sw_error_t
+    fal_port_wol_status_set (a_uint32_t dev_id, fal_port_t port_id,
+			      a_bool_t enable)
+{
+        sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_WOL_STATUS_SET, dev_id, port_id,(a_uint32_t) enable);
+    return rv;
+
+ }
+ sw_error_t
+    fal_port_wol_status_get (a_uint32_t dev_id, fal_port_t port_id,
+			      a_bool_t * enable)
+
+ {
+           sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_WOL_STATUS_GET, dev_id, port_id,(a_uint32_t) enable);
+    return rv;
+ }
+
+sw_error_t
+fal_port_interface_mode_set (a_uint32_t dev_id, fal_port_t port_id, fal_port_interface_mode_t  mode)
+{
+  sw_error_t rv;
+
+  rv = sw_uk_exec(SW_API_PT_INTERFACE_MODE_SET, dev_id, port_id,(a_uint32_t) mode);
+  return rv;
+}
+
+sw_error_t
+fal_port_interface_mode_get (a_uint32_t dev_id, fal_port_t port_id, fal_port_interface_mode_t * mode)
+{
+  sw_error_t rv;
+
+  rv = sw_uk_exec(SW_API_PT_INTERFACE_MODE_GET, dev_id, port_id,(a_uint32_t) mode);
+  return rv;
+}
+
+sw_error_t
+fal_port_interface_mode_status_get (a_uint32_t dev_id, fal_port_t port_id, fal_port_interface_mode_t * mode)
+{
+  sw_error_t rv;
+
+  rv = sw_uk_exec(SW_API_PT_INTERFACE_MODE_STATUS_GET, dev_id, port_id,(a_uint32_t) mode);
+  return rv;
+}
 

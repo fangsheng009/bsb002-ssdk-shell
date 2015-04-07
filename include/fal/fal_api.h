@@ -68,8 +68,32 @@ extern "C" {
     SW_API_DEF(SW_API_PT_CONGESTION_DROP_SET, fal_port_congestion_drop_set), \
     SW_API_DEF(SW_API_PT_CONGESTION_DROP_GET, fal_port_congestion_drop_get), \
     SW_API_DEF(SW_API_PT_RING_FLOW_CTRL_THRES_SET, fal_ring_flow_ctrl_thres_set), \
-	SW_API_DEF(SW_API_PT_RING_FLOW_CTRL_THRES_GET, fal_ring_flow_ctrl_thres_get),
-	
+    SW_API_DEF(SW_API_PT_RING_FLOW_CTRL_THRES_GET, fal_ring_flow_ctrl_thres_get), \
+    SW_API_DEF(SW_API_PT_8023AZ_SET, fal_port_8023az_set), \
+    SW_API_DEF(SW_API_PT_8023AZ_GET, fal_port_8023az_get), \
+    SW_API_DEF(SW_API_PT_MDIX_SET, fal_port_mdix_set), \
+    SW_API_DEF(SW_API_PT_MDIX_GET, fal_port_mdix_get), \
+    SW_API_DEF(SW_API_PT_MDIX_STATUS_GET, fal_port_mdix_status_get), \
+    SW_API_DEF(SW_API_PT_COMBO_PREFER_MEDIUM_SET, fal_port_combo_prefer_medium_set), \
+    SW_API_DEF(SW_API_PT_COMBO_PREFER_MEDIUM_GET, fal_port_combo_prefer_medium_get), \
+    SW_API_DEF(SW_API_PT_COMBO_MEDIUM_STATUS_GET, fal_port_combo_medium_status_get), \
+    SW_API_DEF(SW_API_PT_COMBO_FIBER_MODE_SET, fal_port_combo_fiber_mode_set), \
+    SW_API_DEF(SW_API_PT_COMBO_FIBER_MODE_GET, fal_port_combo_fiber_mode_get), \
+    SW_API_DEF(SW_API_PT_LOCAL_LOOPBACK_SET, fal_port_local_loopback_set), \
+    SW_API_DEF(SW_API_PT_LOCAL_LOOPBACK_GET, fal_port_local_loopback_get), \
+    SW_API_DEF(SW_API_PT_REMOTE_LOOPBACK_SET, fal_port_remote_loopback_set), \
+    SW_API_DEF(SW_API_PT_REMOTE_LOOPBACK_GET, fal_port_remote_loopback_get), \
+    SW_API_DEF(SW_API_PT_RESET, fal_port_reset), \
+    SW_API_DEF(SW_API_PT_POWER_OFF, fal_port_power_off), \
+    SW_API_DEF(SW_API_PT_POWER_ON, fal_port_power_on), \
+    SW_API_DEF(SW_API_PT_MAGIC_FRAME_MAC_SET, fal_port_magic_frame_mac_set), \
+    SW_API_DEF(SW_API_PT_MAGIC_FRAME_MAC_GET, fal_port_magic_frame_mac_get), \
+    SW_API_DEF(SW_API_PT_PHY_ID_GET, fal_port_phy_id_get), \
+    SW_API_DEF(SW_API_PT_WOL_STATUS_SET, fal_port_wol_status_set), \
+    SW_API_DEF(SW_API_PT_WOL_STATUS_GET, fal_port_wol_status_get), \
+    SW_API_DEF(SW_API_PT_INTERFACE_MODE_SET, fal_port_interface_mode_set), \
+    SW_API_DEF(SW_API_PT_INTERFACE_MODE_GET, fal_port_interface_mode_get), \
+    SW_API_DEF(SW_API_PT_INTERFACE_MODE_STATUS_GET, fal_port_interface_mode_status_get),
 
 #define PORTCONTROL_API_PARAM \
     SW_API_DESC(SW_API_PT_DUPLEX_GET) \
@@ -117,7 +141,33 @@ extern "C" {
     SW_API_DESC(SW_API_PT_CONGESTION_DROP_SET) \
     SW_API_DESC(SW_API_PT_CONGESTION_DROP_GET) \
     SW_API_DESC(SW_API_PT_RING_FLOW_CTRL_THRES_SET) \
-    SW_API_DESC(SW_API_PT_RING_FLOW_CTRL_THRES_GET)
+    SW_API_DESC(SW_API_PT_RING_FLOW_CTRL_THRES_GET) \
+    SW_API_DESC(SW_API_PT_8023AZ_SET) \
+    SW_API_DESC(SW_API_PT_8023AZ_GET) \
+    SW_API_DESC(SW_API_PT_MDIX_SET) \
+    SW_API_DESC(SW_API_PT_MDIX_GET) \
+    SW_API_DESC(SW_API_PT_MDIX_STATUS_GET) \
+    SW_API_DESC(SW_API_PT_COMBO_PREFER_MEDIUM_SET) \
+    SW_API_DESC(SW_API_PT_COMBO_PREFER_MEDIUM_GET) \
+    SW_API_DESC(SW_API_PT_COMBO_MEDIUM_STATUS_GET) \
+    SW_API_DESC(SW_API_PT_COMBO_FIBER_MODE_SET) \
+    SW_API_DESC(SW_API_PT_COMBO_FIBER_MODE_GET) \
+    SW_API_DESC(SW_API_PT_LOCAL_LOOPBACK_SET) \
+    SW_API_DESC(SW_API_PT_LOCAL_LOOPBACK_GET) \
+    SW_API_DESC(SW_API_PT_REMOTE_LOOPBACK_SET) \
+    SW_API_DESC(SW_API_PT_REMOTE_LOOPBACK_GET) \
+    SW_API_DESC(SW_API_PT_RESET) \
+    SW_API_DESC(SW_API_PT_POWER_OFF) \
+    SW_API_DESC(SW_API_PT_POWER_ON) \
+    SW_API_DESC(SW_API_PT_MAGIC_FRAME_MAC_SET) \
+    SW_API_DESC(SW_API_PT_MAGIC_FRAME_MAC_GET) \
+    SW_API_DESC(SW_API_PT_PHY_ID_GET) \
+    SW_API_DESC(SW_API_PT_WOL_STATUS_SET) \
+    SW_API_DESC(SW_API_PT_WOL_STATUS_GET) \
+    SW_API_DESC(SW_API_PT_INTERFACE_MODE_SET) \
+    SW_API_DESC(SW_API_PT_INTERFACE_MODE_GET) \
+    SW_API_DESC(SW_API_PT_INTERFACE_MODE_STATUS_GET)
+
 #else
 #define PORTCONTROL_API
 #define PORTCONTROL_API_PARAM
