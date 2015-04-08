@@ -51,12 +51,20 @@ extern "C" {
     typedef sw_error_t
     (*hdr_reg_get) (a_uint32_t dev_id, a_uint32_t reg_addr, a_uint8_t *reg_data, a_uint32_t len);
 
+    typedef sw_error_t
+    (*psgmii_reg_set) (a_uint32_t dev_id, a_uint32_t reg_addr, a_uint8_t *reg_data, a_uint32_t len);
+
+    typedef sw_error_t
+    (*psgmii_reg_get) (a_uint32_t dev_id, a_uint32_t reg_addr, a_uint8_t *reg_data, a_uint32_t len);
+
     typedef struct
     {
         mdio_reg_set    mdio_set;
         mdio_reg_get    mdio_get;
         hdr_reg_set     header_reg_set;
         hdr_reg_get     header_reg_get;
+        psgmii_reg_set     psgmii_reg_set;
+        psgmii_reg_get     psgmii_reg_get;
     } hsl_reg_func;
 
     typedef struct

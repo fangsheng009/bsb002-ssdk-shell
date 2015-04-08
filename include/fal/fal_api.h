@@ -1209,6 +1209,8 @@ extern "C" {
     SW_API_DEF(SW_API_PHY_SET, fal_phy_set), \
     SW_API_DEF(SW_API_REG_GET, fal_reg_get), \
     SW_API_DEF(SW_API_REG_SET, fal_reg_set), \
+    SW_API_DEF(SW_API_PSGMII_REG_GET, fal_psgmii_reg_get), \
+    SW_API_DEF(SW_API_PSGMII_REG_SET, fal_psgmii_reg_set), \
     SW_API_DEF(SW_API_REG_FIELD_GET, fal_reg_field_get), \
     SW_API_DEF(SW_API_REG_FIELD_SET, fal_reg_field_set),
 
@@ -1217,6 +1219,8 @@ extern "C" {
     SW_API_DESC(SW_API_PHY_SET) \
     SW_API_DESC(SW_API_REG_GET) \
     SW_API_DESC(SW_API_REG_SET) \
+    SW_API_DESC(SW_API_PSGMII_REG_GET) \
+    SW_API_DESC(SW_API_PSGMII_REG_SET) \
     SW_API_DESC(SW_API_REG_FIELD_GET) \
     SW_API_DESC(SW_API_REG_FIELD_SET)
 

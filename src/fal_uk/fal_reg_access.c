@@ -58,6 +58,25 @@ fal_reg_set(a_uint32_t dev_id, a_uint32_t reg_addr, a_uint8_t value[],
     return rv;
 }
 
+sw_error_t
+fal_psgmii_reg_get(a_uint32_t dev_id, a_uint32_t reg_addr, a_uint8_t value[],
+            a_uint32_t value_len)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PSGMII_REG_GET, dev_id, reg_addr, value, value_len);
+    return rv;
+}
+
+sw_error_t
+fal_psgmii_reg_set(a_uint32_t dev_id, a_uint32_t reg_addr, a_uint8_t value[],
+            a_uint32_t value_len)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PSGMII_REG_SET, dev_id, reg_addr, value, value_len);
+    return rv;
+}
 
 sw_error_t
 fal_reg_field_get(a_uint32_t dev_id, a_uint32_t reg_addr,

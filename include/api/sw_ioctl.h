@@ -603,6 +603,8 @@ extern "C" {
 #define SW_API_REG_ENTRY_SET       (5  + SW_API_DEBUG_OFFSET)
 #define SW_API_REG_FIELD_GET       (6  + SW_API_DEBUG_OFFSET)
 #define SW_API_REG_FIELD_SET       (7  + SW_API_DEBUG_OFFSET)
+#define SW_API_PSGMII_REG_GET             (8  + SW_API_DEBUG_OFFSET)
+#define SW_API_PSGMII_REG_SET             (9  + SW_API_DEBUG_OFFSET)
 
 
 #define SW_API_MAX                 0xffff

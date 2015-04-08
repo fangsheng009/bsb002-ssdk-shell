@@ -44,6 +44,14 @@ extern "C" {
                 a_uint32_t value_len);
 
     sw_error_t
+    fal_psgmii_reg_get(a_uint32_t dev_id, a_uint32_t reg_addr, a_uint8_t value[],
+                a_uint32_t value_len);
+
+    sw_error_t
+    fal_psgmii_reg_set(a_uint32_t dev_id, a_uint32_t reg_addr, a_uint8_t value[],
+                a_uint32_t value_len);
+
+    sw_error_t
     fal_reg_field_get(a_uint32_t dev_id, a_uint32_t reg_addr,
                       a_uint32_t bit_offset, a_uint32_t field_len,
                       a_uint8_t value[], a_uint32_t value_len);
