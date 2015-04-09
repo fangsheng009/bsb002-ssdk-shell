@@ -121,6 +121,11 @@ extern "C" {
 		SW_FLOWCOOKIE,
 		SW_FDB_RFS,
 		SW_FLOWRFS,
+		SW_CROSSOVER_MODE,
+		SW_CROSSOVER_STATUS,
+		SW_PREFER_MEDIUM,
+		SW_FIBER_MODE,
+		SW_INTERFACE_MODE,
     } sw_data_type_e;
 
     typedef struct

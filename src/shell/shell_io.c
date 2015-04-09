@@ -211,6 +211,11 @@ static sw_data_type_t sw_data_type[] =
 	SW_TYPE_DEF(SW_FLOWCOOKIE, cmd_data_check_flow_cookie, NULL),
 	SW_TYPE_DEF(SW_FLOWRFS, cmd_data_check_flow_rfs, NULL),
 	SW_TYPE_DEF(SW_FDB_RFS, cmd_data_check_fdb_rfs, NULL),
+	SW_TYPE_DEF(SW_CROSSOVER_MODE, cmd_data_check_crossover_mode, cmd_data_print_crossover_mode),
+    SW_TYPE_DEF(SW_CROSSOVER_STATUS, cmd_data_check_crossover_status, cmd_data_print_crossover_status),
+    SW_TYPE_DEF(SW_PREFER_MEDIUM, cmd_data_check_prefer_medium, cmd_data_print_prefer_medium),
+    SW_TYPE_DEF(SW_FIBER_MODE, cmd_data_check_fiber_mode, cmd_data_print_fiber_mode),
+    SW_TYPE_DEF(SW_INTERFACE_MODE, cmd_data_check_interface_mode, cmd_data_print_interface_mode),
 };
 
 sw_data_type_t *
@@ -617,6 +622,212 @@ cmd_data_print_capable(a_uint8_t * param_name, a_uint32_t * buf,
     if (*(a_uint32_t *) buf & FAL_PHY_ADV_ASY_PAUSE)
     {
         dprintf("ASY_PAUSE|");
+    }
+}
+
+sw_error_t
+cmd_data_check_crossover_mode(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size)
+{
+    if (cmd_str == NULL)
+        return SW_BAD_PARAM;
+
+    if (!strncasecmp(cmd_str, "auto", 5))
+        *arg_val = PHY_MDIX_AUTO;
+    else if (!strncasecmp(cmd_str, "mdi", 4))
+        *arg_val = PHY_MDIX_MDI;
+    else if (!strncasecmp(cmd_str, "mdix", 5))
+        *arg_val = PHY_MDIX_MDIX;
+    else
+    {
+        //dprintf("input error \n");
+        return SW_BAD_VALUE;
+    }
+
+    return SW_OK;
+}
+
+void
+cmd_data_print_crossover_mode(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("[%s]:", param_name);
+    if (*(a_uint32_t *) buf == PHY_MDIX_AUTO)
+    {
+        dprintf("AUTO");
+    }
+    else if (*(a_uint32_t *) buf == PHY_MDIX_MDI)
+    {
+        dprintf("MDI");
+    }
+    else if (*(a_uint32_t *) buf == PHY_MDIX_MDIX)
+    {
+        dprintf("MDIX");
+    }
+    else
+    {
+        dprintf("UNKNOWN VALUE");
+    }
+}
+
+sw_error_t
+cmd_data_check_crossover_status(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size)
+{
+    if (cmd_str == NULL)
+        return SW_BAD_PARAM;
+    if (!strncasecmp(cmd_str, "mdi", 4))
+        *arg_val = PHY_MDIX_STATUS_MDI;
+    else if (!strncasecmp(cmd_str, "mdix", 5))
+        *arg_val = PHY_MDIX_STATUS_MDIX;
+    else
+    {
+        //dprintf("input error \n");
+        return SW_BAD_VALUE;
+    }
+
+    return SW_OK;
+}
+
+void
+cmd_data_print_crossover_status(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("[%s]:", param_name);
+    if (*(a_uint32_t *) buf == PHY_MDIX_STATUS_MDI)
+    {
+        dprintf("MDI");
+    }
+    else if (*(a_uint32_t *) buf == PHY_MDIX_STATUS_MDIX)
+    {
+        dprintf("MDIX");
+    }
+    else
+    {
+        dprintf("UNKNOWN VALUE");
+    }
+}
+
+sw_error_t
+cmd_data_check_prefer_medium(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size)
+{
+    if (cmd_str == NULL)
+        return SW_BAD_PARAM;
+    if (!strncasecmp(cmd_str, "copper", 7))
+        *arg_val = PHY_MEDIUM_COPPER;
+    else if (!strncasecmp(cmd_str, "fiber", 6))
+        *arg_val = PHY_MEDIUM_FIBER;
+    else
+    {
+        //dprintf("input error \n");
+        return SW_BAD_VALUE;
+    }
+
+    return SW_OK;
+}
+
+void
+cmd_data_print_prefer_medium(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("[%s]:", param_name);
+    if (*(a_uint32_t *) buf == PHY_MEDIUM_COPPER)
+    {
+        dprintf("COPPER");
+    }
+    else if (*(a_uint32_t *) buf == PHY_MEDIUM_FIBER)
+    {
+        dprintf("FIBER");
+    }
+    else
+    {
+        dprintf("UNKNOWN VALUE");
+    }
+}
+
+sw_error_t
+cmd_data_check_fiber_mode(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size)
+{
+    if (cmd_str == NULL)
+        return SW_BAD_PARAM;
+    if (!strncasecmp(cmd_str, "100fx", 6))
+        *arg_val = PHY_FIBER_100FX;
+    else if (!strncasecmp(cmd_str, "1000bx", 7))
+        *arg_val = PHY_FIBER_1000BX;
+    else
+    {
+        //dprintf("input error \n");
+        return SW_BAD_VALUE;
+    }
+
+    return SW_OK;
+}
+
+void
+cmd_data_print_fiber_mode(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("[%s]:", param_name);
+    if (*(a_uint32_t *) buf == PHY_FIBER_100FX)
+    {
+        dprintf("100FX");
+    }
+    else if (*(a_uint32_t *) buf == PHY_FIBER_1000BX)
+    {
+        dprintf("1000BX");
+    }
+    else
+    {
+        dprintf("UNKNOWN VALUE");
+    }
+}
+
+sw_error_t
+cmd_data_check_interface_mode(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size)
+{
+    if (cmd_str == NULL)
+        return SW_BAD_PARAM;
+
+    if (!strncasecmp(cmd_str, "psgmii_baset", 13))
+        *arg_val = PHY_PSGMII_BASET;
+    else if (!strncasecmp(cmd_str, "psgmii_bx1000", 14))
+        *arg_val = PHY_PSGMII_BX1000;
+    else if (!strncasecmp(cmd_str, "psgmii_fx100", 13))
+        *arg_val = PHY_PSGMII_FX100;
+    else if (!strncasecmp(cmd_str, "psgmii_amdet", 13))
+        *arg_val = PHY_PSGMII_AMDET;
+    else if (!strncasecmp(cmd_str, "sgmii_baset", 13))
+        *arg_val = PHY_SGMII_BASET;
+    else
+    {
+        //dprintf("input error \n");
+        return SW_BAD_VALUE;
+    }
+
+    return SW_OK;
+}
+
+void
+cmd_data_print_interface_mode(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("[%s]:", param_name);
+    if (*(a_uint32_t *) buf == PHY_PSGMII_BASET)
+    {
+        dprintf("PSGMII_BASET");
+    }
+    else if (*(a_uint32_t *) buf == PHY_PSGMII_BX1000)
+    {
+        dprintf("PSGMII_BX1000");
+    }
+    else if (*(a_uint32_t *) buf == PHY_PSGMII_FX100)
+    {
+        dprintf("PSGMII_FX100");
+    }
+        else if (*(a_uint32_t *) buf == PHY_PSGMII_AMDET)
+    {
+        dprintf("PSGMII_AMDET");
+    }
+        else if (*(a_uint32_t *) buf == PHY_SGMII_BASET)
+    {
+        dprintf("SGMII_BASET");
+    }
+    else
+    {
+        dprintf("UNKNOWN VALUE");
     }
 }
 
