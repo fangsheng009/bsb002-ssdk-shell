@@ -671,7 +671,7 @@ fal_port_power_on(a_uint32_t dev_id, fal_port_t port_id)
  {
              sw_error_t rv;
 
-    rv = sw_uk_exec(SW_API_PT_WOL_STATUS_GET, dev_id, port_id, (a_uint32_t) org_id, (a_uint32_t) rev_id);
+    rv = sw_uk_exec(SW_API_PT_PHY_ID_GET, dev_id, port_id, (a_uint32_t) org_id, (a_uint32_t) rev_id);
     return rv;
  }
  sw_error_t
