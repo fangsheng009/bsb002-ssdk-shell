@@ -34,6 +34,7 @@ extern "C" {
         a_uint32_t session_id;
         a_bool_t   multi_session;
         a_bool_t   uni_session;
+        a_uint32_t vrf_id;
     } fal_pppoe_session_t;
 
     typedef enum
