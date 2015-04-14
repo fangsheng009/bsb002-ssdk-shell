@@ -6103,6 +6103,29 @@ cmd_data_check_pppoe(char *cmd_str, void * val, a_uint32_t size)
     }
     while (talk_mode && (SW_OK != rv));
 
+    do
+    {
+        cmd = get_sub_cmd("vrf_id", "0");
+		SW_RTN_ON_NULL_PARAM(cmd);
+
+        if (!strncasecmp(cmd, "quit", 4))
+        {
+            return SW_BAD_VALUE;
+        }
+        else if (!strncasecmp(cmd, "help", 4))
+        {
+            dprintf("usage: the range is 0 -- 7\n");
+            rv = SW_BAD_VALUE;
+        }
+        else
+        {
+            rv = cmd_data_check_uint32(cmd, &entry.vrf_id, sizeof (a_uint32_t));
+            if (SW_OK != rv)
+                dprintf("usage: the range is 0 -- 7\n");
+        }
+    }
+    while (talk_mode && (SW_OK != rv));
+
     *(fal_pppoe_session_t*)val = entry;
     return SW_OK;
 }
@@ -6113,11 +6136,12 @@ cmd_data_print_pppoe(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
     fal_pppoe_session_t *entry;
 
     entry = (fal_pppoe_session_t *) buf;
-    dprintf("[EntryID]:0x%x  [SessionID]:0x%x  [MultiSession]:%s  [UniSession]:%s",
+    dprintf("[EntryID]:0x%x  [SessionID]:0x%x  [MultiSession]:%s  [UniSession]:%s  [Vrf_ID]:0x%x",
             entry->entry_id,
             entry->session_id,
             entry->multi_session ? "YES":"NO",
-            entry->uni_session ?   "YES":"NO");
+            entry->uni_session ?   "YES":"NO",
+            entry->vrf_id);
 }
 
 sw_error_t
