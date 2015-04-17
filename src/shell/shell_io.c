@@ -574,7 +574,7 @@ cmd_data_check_capable(char *cmd_str, a_uint32_t * arg_val, a_uint32_t size)
         return SW_BAD_PARAM;
 
     cmd_strtol(cmd_str, arg_val);
-    if (*arg_val & (~FAL_PHY_GE_ADV_ALL))
+    if (*arg_val & (~FAL_PHY_COMBO_ADV_ALL))
     {
         //dprintf("input error should be within 0x3f\n");
         return SW_BAD_VALUE;
