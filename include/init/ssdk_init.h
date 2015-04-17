@@ -218,10 +218,6 @@ extern "C" {
     ssdk_init(a_uint32_t dev_id, ssdk_init_cfg *cfg);
 
     sw_error_t
-    ssdk_reduced_init(a_uint32_t dev_id, hsl_init_mode cpu_mode,
-                      hsl_access_mode reg_mode);
-
-    sw_error_t
     ssdk_hsl_access_mode_set(a_uint32_t dev_id, hsl_access_mode reg_mode);
 
 #ifdef __cplusplus
