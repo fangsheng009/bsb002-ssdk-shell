@@ -126,6 +126,7 @@ extern "C" {
 		SW_PREFER_MEDIUM,
 		SW_FIBER_MODE,
 		SW_INTERFACE_MODE,
+		SW_COUNTER_INFO,
     } sw_data_type_e;
 
     typedef struct

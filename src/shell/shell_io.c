@@ -216,6 +216,7 @@ static sw_data_type_t sw_data_type[] =
     SW_TYPE_DEF(SW_PREFER_MEDIUM, cmd_data_check_prefer_medium, cmd_data_print_prefer_medium),
     SW_TYPE_DEF(SW_FIBER_MODE, cmd_data_check_fiber_mode, cmd_data_print_fiber_mode),
     SW_TYPE_DEF(SW_INTERFACE_MODE, cmd_data_check_interface_mode, cmd_data_print_interface_mode),
+    SW_TYPE_DEF(SW_COUNTER_INFO, NULL, cmd_data_print_counter_info),
 };
 
 sw_data_type_t *
@@ -485,6 +486,30 @@ cmd_data_print_mib(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
             dprintf("\n");
     }
 }
+
+/*port counter*/
+static char *counter_regname[] =
+{
+    "RxGoodFrame",
+    "RxBadCRC   ",
+    "TxGoodFrame",
+    "TxBadCRC   ",
+};
+
+void
+cmd_data_print_counter_info(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("\n[%s] \n", param_name);
+    a_uint32_t offset = 0;
+    for (offset = 0; offset < (sizeof (fal_port_counter_info_t) / sizeof (a_uint32_t));
+            offset++)
+    {
+
+        dprintf("%s<0x%08x>\n", counter_regname[offset], *(buf + offset));
+
+    }
+}
+
 
 /*port ctrl*/
 sw_error_t

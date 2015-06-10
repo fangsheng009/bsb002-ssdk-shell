@@ -722,3 +722,37 @@ fal_port_interface_mode_status_get (a_uint32_t dev_id, fal_port_t port_id, fal_p
   return rv;
 }
 
+sw_error_t
+fal_port_counter_set(a_uint32_t dev_id, fal_port_t port_id,
+                       a_bool_t enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_COUNTER_SET, dev_id, port_id,
+                    (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_port_counter_get(a_uint32_t dev_id, fal_port_t port_id,
+                       a_bool_t * enable)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_COUNTER_GET, dev_id, port_id,
+                    (a_uint32_t) enable);
+    return rv;
+}
+
+sw_error_t
+fal_port_counter_show(a_uint32_t dev_id, fal_port_t port_id,
+                       fal_port_counter_info_t * counter_info)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_PT_COUNTER_SHOW, dev_id, port_id,
+                    (a_uint32_t) counter_info);
+    return rv;
+}
+
+

@@ -93,7 +93,10 @@ extern "C" {
     SW_API_DEF(SW_API_PT_WOL_STATUS_GET, fal_port_wol_status_get), \
     SW_API_DEF(SW_API_PT_INTERFACE_MODE_SET, fal_port_interface_mode_set), \
     SW_API_DEF(SW_API_PT_INTERFACE_MODE_GET, fal_port_interface_mode_get), \
-    SW_API_DEF(SW_API_PT_INTERFACE_MODE_STATUS_GET, fal_port_interface_mode_status_get),
+    SW_API_DEF(SW_API_PT_INTERFACE_MODE_STATUS_GET, fal_port_interface_mode_status_get), \
+    SW_API_DEF(SW_API_PT_COUNTER_SET, fal_port_counter_set), \
+    SW_API_DEF(SW_API_PT_COUNTER_GET, fal_port_counter_get), \
+    SW_API_DEF(SW_API_PT_COUNTER_SHOW, fal_port_counter_show),
 
 #define PORTCONTROL_API_PARAM \
     SW_API_DESC(SW_API_PT_DUPLEX_GET) \
@@ -166,7 +169,10 @@ extern "C" {
     SW_API_DESC(SW_API_PT_WOL_STATUS_GET) \
     SW_API_DESC(SW_API_PT_INTERFACE_MODE_SET) \
     SW_API_DESC(SW_API_PT_INTERFACE_MODE_GET) \
-    SW_API_DESC(SW_API_PT_INTERFACE_MODE_STATUS_GET)
+    SW_API_DESC(SW_API_PT_INTERFACE_MODE_STATUS_GET) \
+    SW_API_DESC(SW_API_PT_COUNTER_SET) \
+    SW_API_DESC(SW_API_PT_COUNTER_GET) \
+    SW_API_DESC(SW_API_PT_COUNTER_SHOW)
 
 #else
 #define PORTCONTROL_API
