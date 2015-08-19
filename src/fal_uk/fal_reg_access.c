@@ -101,3 +101,21 @@ fal_reg_field_set(a_uint32_t dev_id, a_uint32_t reg_addr,
     return rv;
 }
 
+sw_error_t
+fal_reg_dump(a_uint32_t dev_id, a_uint32_t reg_idx,fal_reg_dump_t *reg_dump)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_REG_DUMP, dev_id, (a_uint32_t) reg_idx,(a_uint32_t) reg_dump);
+    return rv;
+}
+
+
+sw_error_t
+fal_dbg_reg_dump(a_uint32_t dev_id,fal_reg_dump_t *reg_dump)
+{
+    sw_error_t rv;
+
+    rv = sw_uk_exec(SW_API_DBG_REG_DUMP, dev_id,(a_uint32_t) reg_dump);
+    return rv;
+}

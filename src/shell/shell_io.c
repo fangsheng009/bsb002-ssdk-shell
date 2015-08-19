@@ -217,6 +217,8 @@ static sw_data_type_t sw_data_type[] =
     SW_TYPE_DEF(SW_FIBER_MODE, cmd_data_check_fiber_mode, cmd_data_print_fiber_mode),
     SW_TYPE_DEF(SW_INTERFACE_MODE, cmd_data_check_interface_mode, cmd_data_print_interface_mode),
     SW_TYPE_DEF(SW_COUNTER_INFO, NULL, cmd_data_print_counter_info),
+    SW_TYPE_DEF(SW_REG_DUMP, NULL, cmd_data_print_register_info),
+    SW_TYPE_DEF(SW_DBG_REG_DUMP, NULL, cmd_data_print_debug_register_info),
 };
 
 sw_data_type_t *
@@ -508,6 +510,60 @@ cmd_data_print_counter_info(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t
         dprintf("%s<0x%08x>\n", counter_regname[offset], *(buf + offset));
 
     }
+}
+
+void
+cmd_data_print_debug_register_info(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("\n[%s]", param_name);
+	fal_debug_reg_dump_t * reg_dump = (fal_debug_reg_dump_t * )buf;
+
+	a_uint32_t reg_count;
+
+	dprintf("\n%s. ", reg_dump->reg_name);
+
+	reg_count = 0;
+	dprintf("\n");
+	for (;reg_count < reg_dump->reg_count;reg_count++)
+	{
+		dprintf("%08x:%08x  ",reg_dump->reg_addr[reg_count], reg_dump->reg_value[reg_count]);
+		if ((reg_count + 1) % 4 == 0)
+			dprintf("\n");
+	}
+
+	dprintf("\n\n\n");
+}
+
+
+
+void
+cmd_data_print_register_info(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size)
+{
+    dprintf("\n[%s]", param_name);
+	fal_reg_dump_t * reg_dump = (fal_reg_dump_t * )buf;
+
+	a_uint32_t n[8]={0,4,8,0xc,0x10,0x14,0x18,0x1c};
+
+	a_uint32_t i;
+	a_uint32_t dump_addr, reg_count, reg_val;
+
+	dprintf("\n%s. ", reg_dump->reg_name);
+	dprintf("\n	%8x %8x %8x %8x %8x %8x %8x %8x\n",
+					n[0],n[1],n[2],n[3],n[4],n[5],n[6],n[7]);
+	dprintf(" [%04x] ", reg_dump->reg_base);
+
+	reg_count = 0;
+	for (dump_addr = reg_dump->reg_base;
+			(dump_addr <= reg_dump->reg_end )&& (reg_count <= reg_dump->reg_count);
+			reg_count++)
+	{
+		dprintf("%08x ", reg_dump->reg_value[reg_count]);
+		dump_addr += 4;
+		if ((reg_count + 1) % 8 == 0)
+			dprintf("\n [%04x] ", dump_addr);
+	}
+
+	dprintf("\n\n\n");
 }
 
 

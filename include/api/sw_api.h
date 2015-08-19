@@ -127,6 +127,8 @@ extern "C" {
 		SW_FIBER_MODE,
 		SW_INTERFACE_MODE,
 		SW_COUNTER_INFO,
+		SW_REG_DUMP,
+		SW_DBG_REG_DUMP,
     } sw_data_type_e;
 
     typedef struct

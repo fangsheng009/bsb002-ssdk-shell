@@ -1218,7 +1218,10 @@ extern "C" {
     SW_API_DEF(SW_API_PSGMII_REG_GET, fal_psgmii_reg_get), \
     SW_API_DEF(SW_API_PSGMII_REG_SET, fal_psgmii_reg_set), \
     SW_API_DEF(SW_API_REG_FIELD_GET, fal_reg_field_get), \
-    SW_API_DEF(SW_API_REG_FIELD_SET, fal_reg_field_set),
+    SW_API_DEF(SW_API_REG_FIELD_SET, fal_reg_field_set), \
+    SW_API_DEF(SW_API_REG_DUMP, fal_reg_dump), \
+    SW_API_DEF(SW_API_DBG_REG_DUMP, fal_dbg_reg_dump),
+
 
 #define REG_API_PARAM \
     SW_API_DESC(SW_API_PHY_GET) \
@@ -1228,7 +1231,9 @@ extern "C" {
     SW_API_DESC(SW_API_PSGMII_REG_GET) \
     SW_API_DESC(SW_API_PSGMII_REG_SET) \
     SW_API_DESC(SW_API_REG_FIELD_GET) \
-    SW_API_DESC(SW_API_REG_FIELD_SET)
+    SW_API_DESC(SW_API_REG_FIELD_SET) \
+    SW_API_DESC(SW_API_REG_DUMP) \
+    SW_API_DESC(SW_API_DBG_REG_DUMP)
 
 
 #define SSDK_API \
