@@ -1901,7 +1901,16 @@ extern "C" {
     SW_PARAM_DEF(SW_API_REG_FIELD_SET, SW_UINT32, 4, SW_PARAM_PTR|SW_PARAM_IN, "Data"),\
     SW_PARAM_DEF(SW_API_REG_FIELD_SET, SW_UINT32, 4, SW_PARAM_IN, "Data Len"),
 
+#define SW_API_REG_DUMP_DESC \
+    SW_PARAM_DEF(SW_API_REG_DUMP, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"), \
+    SW_PARAM_DEF(SW_API_REG_DUMP, SW_UINT32, 4, SW_PARAM_IN, "Register group idx"), \
+    SW_PARAM_DEF(SW_API_REG_DUMP, SW_REG_DUMP, sizeof(fal_reg_dump_t), SW_PARAM_PTR|SW_PARAM_OUT, \
+              "Register dump"),
 
+#define SW_API_DBG_REG_DUMP_DESC \
+    SW_PARAM_DEF(SW_API_DBG_REG_DUMP, SW_UINT32, 4, SW_PARAM_IN, "Dev ID"), \
+    SW_PARAM_DEF(SW_API_DBG_REG_DUMP, SW_DBG_REG_DUMP, sizeof(fal_debug_reg_dump_t), SW_PARAM_PTR|SW_PARAM_OUT, \
+              "Debug Register dump"),
 
 
 #define SW_API_COSMAP_DSCP_TO_PRI_SET_DESC \

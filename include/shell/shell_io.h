@@ -399,5 +399,11 @@ cmd_data_print_interface_mode(a_uint8_t * param_name, a_uint32_t * buf, a_uint32
 void
 cmd_data_print_counter_info(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
 
+void
+cmd_data_print_register_info(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
+void
+cmd_data_print_debug_register_info(a_uint8_t * param_name, a_uint32_t * buf, a_uint32_t size);
+
 #endif
 

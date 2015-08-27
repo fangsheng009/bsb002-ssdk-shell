@@ -61,6 +61,11 @@ extern "C" {
                       a_uint32_t bit_offset, a_uint32_t field_len,
                       const a_uint8_t value[], a_uint32_t value_len);
 
+	sw_error_t 
+	fal_reg_dump(a_uint32_t dev_id, a_uint32_t reg_idx,fal_reg_dump_t *reg_dump);
+
+	sw_error_t
+	fal_dbg_reg_dump(a_uint32_t dev_id, fal_reg_dump_t *reg_dump);
 
 #ifdef __cplusplus
 }

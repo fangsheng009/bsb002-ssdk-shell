@@ -109,28 +109,29 @@ extern "C" {
 
 	} led_source_cfg_t;
 
-    typedef struct
-    {
-        hsl_init_mode   cpu_mode;
-        hsl_access_mode reg_mode;
-        hsl_reg_func    reg_func;
+typedef struct
+{
+	hsl_init_mode   cpu_mode;
+	hsl_access_mode reg_mode;
+	hsl_reg_func    reg_func;
 
-        ssdk_chip_type  chip_type;
+	ssdk_chip_type  chip_type;
 
-        /* os specific parameter */
-        /* when uk_if based on netlink, it's netlink protocol type*/
-        /* when uk_if based on ioctl, it's minor device number, major number
-           is always 10(misc device) */
-        a_uint32_t      nl_prot;
+	/* os specific parameter */
+	/* when uk_if based on netlink, it's netlink protocol type*/
+	/* when uk_if based on ioctl, it's minor device number, major number
+	is always 10(misc device) */
+	a_uint32_t      nl_prot;
 
-        /* chip specific parameter */
-        void *          chip_spec_cfg;
-        /* port cfg */
-        ssdk_port_cfg   port_cfg;
-        a_uint32_t      mac_mode;
-        a_uint32_t led_source_num;
-        led_source_cfg_t led_source_cfg[14];
-    } ssdk_init_cfg;
+	/* chip specific parameter */
+	void *          chip_spec_cfg;
+	/* port cfg */
+	ssdk_port_cfg   port_cfg;
+	a_uint32_t      mac_mode;
+	a_uint32_t led_source_num;
+	led_source_cfg_t led_source_cfg[14];
+	a_uint32_t      phy_id;
+} ssdk_init_cfg;
 
 #if defined ATHENA
 #define def_init_cfg  {.reg_mode = HSL_MDIO, .cpu_mode = HSL_CPU_2};

@@ -96,6 +96,22 @@ extern "C" {
         a_uint32_t     egress_byte;
     } fal_counter_entry_t;
 
+	typedef struct{
+		a_uint32_t reg_count;
+		a_uint32_t reg_base;
+		a_uint32_t reg_end;
+		a_uint32_t reg_value[256];
+		a_int8_t   reg_name[32];
+	}fal_reg_dump_t;
+
+	typedef struct{
+		a_uint32_t reg_count;
+		a_uint32_t reg_addr[32];
+		a_uint32_t reg_value[32];
+		a_int8_t   reg_name[32];
+	}fal_debug_reg_dump_t;
+
+
 #ifdef __cplusplus
 }
 #endif                          /* __cplusplus */
