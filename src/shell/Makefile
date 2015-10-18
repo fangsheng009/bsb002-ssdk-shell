@@ -21,4 +21,4 @@ else
 endif
 
 lib:
-	$(CC) $(CFLAGS) $(OBJ_FILE) $(BIN_DIR)/$(US_MOD)_$(RUNMODE).a -o $(DST_DIR)/$(SHELLOBJ) $(PT_LIB)
+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $(LDFLAGS) $(OBJ_FILE) $(BIN_DIR)/$(US_MOD)_$(RUNMODE).a -o $(DST_DIR)/$(SHELLOBJ) $(PT_LIB)
